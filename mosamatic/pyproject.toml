@@ -11,15 +11,17 @@ author_email = "ralph.brecheisen@gmail.com"
 [tool.briefcase.app.mosamatic]
 formal_name = "My Django App"
 description = "Template project for Django app"
-long_description = """More details about the app should go here.
-"""
+long_description = """More details about the app should go here"""
+console_app = true
+
 sources = [
     "src/mosamatic",
+    "src/models.py",
 ]
+
 test_sources = [
     "tests",
 ]
-console_app = true
 
 requires = [
     "django",
@@ -41,6 +43,7 @@ requires = [
     "torchvision",
     "opencv-python",
 ]
+
 test_requires = [
     "pytest",
     "pytest-django",

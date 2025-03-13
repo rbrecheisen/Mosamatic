@@ -1,0 +1,55 @@
+{
+    "pipeline_name": "BasicPipeline",
+    "input": "/pipeline_data/input",
+    "output": "/pipeline_data/output",
+    "tasks": [
+        {
+            "name": "DecompressDicomFilesTask",
+            "inputs": {
+                "images": "__pipeline.input__"
+            },
+            "outputs": {
+                "output": "/pipeline_data/DecompressDicomFilesTask"
+            },
+            "params": null
+        },
+        {
+            "name": "RescaleDicomFilesTask",
+            "inputs": {
+                "images": "__DecompressDicomFilesTask.outputs.output__"
+            },
+            "outputs": {
+                "output": "/pipeline_data/RescaleDicomFilesTask"
+            },
+            "params": {
+                "target_size": 512
+            }
+        },
+        {
+            "name": "MuscleFatSegmentationL3Task",
+            "inputs": {
+                "images": "__RescaleDicomFilesTask.outputs.output__",
+                "model_files": "/pipeline_data/TensorFlowModelFiles"
+            },
+            "outputs": {
+                "segmentations": "/pipeline_data/MuscleFatSegmentationL3Task"
+            },
+            "params": {
+                "model_type": "tensorflow",
+                "model_version": 1.0
+            }
+        },
+        {
+            "name": "CalculateMetricsTask",
+            "inputs": {
+                "images": "__RescaleDicomFilesTask.outputs.output__",
+                "segmentations": "__MuscleFatSegmentationL3Task.outputs.segmentations__",
+                "patient_heights": null
+            },
+            "outputs": {
+                "metrics": "__pipeline.output__"
+            },
+            "params": null
+        }
+    ]
+}

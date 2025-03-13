@@ -17,8 +17,12 @@ COPY docker-entrypoint.sh /docker-entrypoint.sh
 RUN dos2unix /docker-entrypoint.sh
 
 COPY mosamatic/src/mosamatic /src
+COPY mosamatic/src/models.py /src/models.py
 
 WORKDIR /src
+
+# Make sure models.py can be found
+ENV PYTHONPATH="${PYTHONPATH}:/src"
 
 RUN apt-get autoremove -y && \
     apt-get clean && \
