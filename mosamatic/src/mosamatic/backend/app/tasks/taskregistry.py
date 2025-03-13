@@ -91,4 +91,16 @@ TASK_REGISTRY = {
         'outputs': [{'name': 'metrics', 'label': 'Enter name for metrics output (optional)'}],
         'params': [],
     },
+
+    'CreatePngsFromSegmentationsTask': {
+        'class': CreatePngsFromSegmentationsTask,
+        'title': 'CreatePngsFromSegmentationsTask',
+        'description': 'Task that generates PNG images from muscle and fat annotation output',
+        'inputs': [{'name': 'segmentations', 'label': 'Select segmentations'}],
+        'outputs': [{'name': 'png_images', 'label': 'Enter name for PNG output (optional)'}],
+        'params': [
+            {'name': 'fig_width', 'label': 'Figure width', 'type': 'int', 'value': 10},
+            {'name': 'fig_height', 'label': 'Figure height', 'type': 'int', 'value': 10},
+        ],
+    },
 }

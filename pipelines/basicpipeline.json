@@ -1,0 +1,55 @@
+{
+    "pipeline_name": "BasicPipeline",
+    "input": "D:\\Mosamatic\\DjangoTemplate\\ExamplePipeline\\input",
+    "output": "D:\\Mosamatic\\DjangoTemplate\\ExamplePipeline\\output",
+    "tasks": [
+        {
+            "name": "DecompressDicomFilesTask",
+            "inputs": {
+                "images": "__pipeline.input__"
+            },
+            "outputs": {
+                "output": "D:\\Mosamatic\\DjangoTemplate\\ExamplePipeline\\DecompressDicomFilesTask"
+            },
+            "params": null
+        },
+        {
+            "name": "RescaleDicomFilesTask",
+            "inputs": {
+                "images": "__DecompressDicomFilesTask.outputs.output__"
+            },
+            "outputs": {
+                "output": "D:\\Mosamatic\\DjangoTemplate\\ExamplePipeline\\RescaleDicomFilesTask"
+            },
+            "params": {
+                "target_size": 512
+            }
+        },
+        {
+            "name": "MuscleFatSegmentationL3Task",
+            "inputs": {
+                "images": "__RescaleDicomFilesTask.outputs.output__",
+                "model_files": "D:\\Mosamatic\\TensorFlowModelFiles"
+            },
+            "outputs": {
+                "segmentations": "D:\\Mosamatic\\DjangoTemplate\\ExamplePipeline\\MuscleFatSegmentationL3Task"
+            },
+            "params": {
+                "model_type": "tensorflow",
+                "model_version": 1.0
+            }
+        },
+        {
+            "name": "CalculateMetricsTask",
+            "inputs": {
+                "images": "__RescaleDicomFilesTask.outputs.output__",
+                "segmentations": "__MuscleFatSegmentationL3Task.outputs.segmentations__",
+                "patient_heights": null
+            },
+            "outputs": {
+                "metrics": "__pipeline.output__"
+            },
+            "params": null
+        }
+    ]
+}

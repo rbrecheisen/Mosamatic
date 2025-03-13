@@ -28,7 +28,7 @@ class TorchModel:
                     with open(f_path, 'r') as obj:
                         params = json.load(obj)
                 else:
-                    raise RuntimeError(f'Unknown file {f_name}')
+                    pass
         return model, contour_model, params
 
     def predict_contour(self, image, contour_model, params):

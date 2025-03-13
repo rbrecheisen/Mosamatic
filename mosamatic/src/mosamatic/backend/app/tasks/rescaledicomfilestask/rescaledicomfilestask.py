@@ -31,7 +31,7 @@ class RescaleDicomFilesTask(Task):
 
     def execute(self):
         target_size = self.param('target_size', 512)
-        input_files = self.input('input')
+        input_files = self.input('images')
         nr_steps = len(input_files)
         for step in range(nr_steps):
             if self.is_canceled():

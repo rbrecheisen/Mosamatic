@@ -7,7 +7,7 @@ from ...utils import is_jpeg2000_compressed, is_dicom, load_dicom
 
 class DecompressDicomFilesTask(Task):
     def execute(self):
-        input_files = self.input('input')
+        input_files = self.input('images')
         nr_steps = len(input_files)
         for step in range(nr_steps):
             if self.is_canceled():

@@ -93,6 +93,8 @@ class TaskManager:
     def run_pipeline(self, config):
         # Define inline function to resolve file and directory paths
         def resolve_dir(dir_path, config):
+            if dir_path is None:
+                return None
             if dir_path.startswith('__pipeline'):
                 dir_name = dir_path.split('__')[1].split('.')[1]
                 return config[dir_name]
@@ -112,9 +114,11 @@ class TaskManager:
             for output_name in task_info['outputs'].keys():
                 dir_path = resolve_dir(task_info['outputs'][output_name], config)
                 task_info['outputs'][output_name] = dir_path
+        # Print config
         print(json.dumps(config, indent=4))
         # Run tasks in sequence
         for task_info in config['tasks']:
+            print('Running task {}...'.format(task_info['name']))
             inputs = {}
             for input_name in task_info['inputs'].keys():
                 input_files = []
