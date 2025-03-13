@@ -1,5 +1,5 @@
 {
     "python.analysis.extraPaths": [
-        "./mydjangoapp/src/mydjangoapp/backend"
+        "./mosamatic/src/mosamatic/backend"
     ]
 }

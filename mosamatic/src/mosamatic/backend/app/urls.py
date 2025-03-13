@@ -2,7 +2,7 @@ from django.urls import path
 
 from .views.miscellaneous import auth, custom_logout, logs, help
 from .views.filesets import filesets, fileset, upload_fileset, rename_fileset, delete_fileset, download_fileset
-from .views.files import png, txt, csv
+from .views.files import file, png, txt, csv
 from .views.tasks import tasks, task, run_task, cancel_task, remove_task, pipeline, run_pipeline
 
 
@@ -24,6 +24,7 @@ urlpatterns = [
     path('filesets/<str:fileset_id>/download', download_fileset),
 
     # Files
+    path('filesets/<str:fileset_id>/files/<str:file_id>', file),
     path('filesets/<str:fileset_id>/files/<str:file_id>/png', png),
     path('filesets/<str:fileset_id>/files/<str:file_id>/text', txt),
     path('filesets/<str:fileset_id>/files/<str:file_id>/csv', csv),

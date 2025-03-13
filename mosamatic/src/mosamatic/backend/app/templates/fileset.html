@@ -33,6 +33,8 @@
             <div class="card" style="margin-top: 10px;">
                 <div class="card-header">Files</b></div>
                 <div class="card-body">
+                    <p>Files with extension *.png, *.txt, *.json or .*csv can be viewed in the browser. All other file types will be downloaded when clicked.</p>
+                    <br>
                     <table class="table">
                         <tr>
                             <th>Name</th>
@@ -46,9 +48,9 @@
                                     {% elif f.name|endswith:"txt" or f.name|endswith:"json" %}
                                         <a href="/filesets/{{ fileset.id }}/files/{{ f.id }}/text">{{ f.name }}</a>
                                     {% elif f.name|endswith:"csv" %}
-                                    <a href="/filesets/{{ fileset.id }}/files/{{ f.id }}/csv">{{ f.name }}</a>
+                                        <a href="/filesets/{{ fileset.id }}/files/{{ f.id }}/csv">{{ f.name }}</a>
                                     {% else %}
-                                        {{ f.name }}
+                                        <a href="/filesets/{{ fileset.id }}/files/{{ f.id }}">{{ f.name }}</a>
                                     {% endif %}
                                 </td>
                                 <td>{{ f.size }}</td>

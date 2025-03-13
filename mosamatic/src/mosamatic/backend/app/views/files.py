@@ -4,7 +4,7 @@ import csv
 from django.shortcuts import render
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.http import Http404
+from django.http import FileResponse, Http404
 
 from ..managers.logmanager import LogManager
 from ..models import FileModel
@@ -13,12 +13,20 @@ LOG = LogManager()
 
 
 @login_required
-def png(request, fileset_id, file_id):
+def file(request, fileset_id, file_id):
     if request.method == 'GET':
         f = FileModel.objects.get(pk=file_id)
         file_path = os.path.join(settings.MEDIA_ROOT, f.path())
         if os.path.exists(file_path):
-            return render(request, 'file.html', context={'file': f, 'file_type': 'png', 'fileset_id': fileset_id})
+            return FileResponse(open(file_path, 'rb'), as_attachment=True)
+    return Http404(f'File {file_id} not found')
+
+
+@login_required
+def png(request, fileset_id, file_id):
+    if request.method == 'GET':
+        f = FileModel.objects.get(pk=file_id)
+        return render(request, 'file.html', context={'file': f, 'file_type': 'png', 'fileset_id': fileset_id})
     return Http404(f'File {file_id} not found')
 
 
