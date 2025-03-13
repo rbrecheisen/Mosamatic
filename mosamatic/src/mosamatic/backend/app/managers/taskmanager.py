@@ -122,8 +122,11 @@ class TaskManager:
             inputs = {}
             for input_name in task_info['inputs'].keys():
                 input_files = []
-                for f in os.listdir(task_info['inputs'][input_name]):
-                    input_files.append(os.path.join(task_info['inputs'][input_name], f))
+                input_dir = task_info['inputs'][input_name]
+                if input_dir is None: # Optional input can be None
+                    continue
+                for f in os.listdir(input_dir):
+                    input_files.append(os.path.join(input_dir, f))
                 inputs[input_name] = input_files
             outputs = {}
             for output_name in task_info['outputs'].keys():
