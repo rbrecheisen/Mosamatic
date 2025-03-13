@@ -10,6 +10,19 @@ pendulum
 pytest
 pytest-django
 
+# Processing
+numpy
+pandas
+scipy
+pillow
+pydicom
+python-gdcm
+pynetdicom
+tensorflow==2.15.0
+torch
+torchvision
+opencv-python
+
 # Required for Docker
 psycopg2-binary
 gunicorn

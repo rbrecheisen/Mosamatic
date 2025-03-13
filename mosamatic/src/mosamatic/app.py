@@ -24,5 +24,4 @@ def run_server():
 
 
 def main():
-    print('Running My Django App server...')
     run_server()

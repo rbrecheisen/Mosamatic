@@ -81,15 +81,14 @@ class Task(threading.Thread):
         return self._created
     
     def run(self):
-        # try:
-        self.set_status(TaskStatus.RUNNING)
-        self.execute()
-        if not self.is_canceled():
-            # self.queue().put(output)
-            self.notify_finished()
-            self.set_status(TaskStatus.COMPLETED)
-        # except Exception as e:
-        #     self.set_status(TaskStatus.FAILED, str(e))
+        try:
+            self.set_status(TaskStatus.RUNNING)
+            self.execute()
+            if not self.is_canceled():
+                self.notify_finished()
+                self.set_status(TaskStatus.COMPLETED)
+        except Exception as e:
+            self.set_status(TaskStatus.FAILED, str(e))
 
     def execute(self):
         raise NotImplementedError('Must be implemented in child class')

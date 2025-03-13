@@ -40,6 +40,14 @@
                             {% if param.type == "bool" %}
                                 <input class="form-check-input" type="checkbox" value="1" id="{{ param.name }}" name="{{ param.name }}">
                             {% endif %}
+                            {% if param.type == "select" %}
+                                <select class="form-select" id="{{ param.name }}" name="{{ param.name }}">
+                                    <option selected>{{ param.label }}</option>
+                                    {% for option in param.options %}
+                                        <option value="{{ option }}">{{ option }}</option>
+                                    {% endfor %}
+                                </select>
+                            {% endif %}
                             <br>
                         {% endfor %}
                         <br>

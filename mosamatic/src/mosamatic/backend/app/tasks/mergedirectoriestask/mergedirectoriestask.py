@@ -11,8 +11,14 @@ class MergeDirectoriesTask(Task):
             nr_steps += len(input_files)
         step = 0
         keep_duplicates = self.param('keep_duplicates', False)
+        stop = False
         for input_files in self.inputs().values():
+            if stop:
+                break
             for source in input_files:
+                if self.is_canceled():
+                    stop = True
+                    break
                 source_name = os.path.split(source)[1]
                 target = os.path.join(self.output('output'), source_name)
                 if keep_duplicates and os.path.exists(target):

@@ -29,6 +29,17 @@ requires = [
     "django-crispy-forms",
     "crispy-bootstrap5",
     "pendulum",
+    "numpy",
+    "pandas",
+    "scipy",
+    "pillow",
+    "pydicom",
+    "python-gdcm",
+    "pynetdicom",
+    "tensorflow==2.15.0",
+    "torch",
+    "torchvision",
+    "opencv-python",
 ]
 test_requires = [
     "pytest",
