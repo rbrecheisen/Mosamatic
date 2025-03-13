@@ -1,4 +1,4 @@
-FROM python:3.12
+FROM python:3.9
 
 RUN apt-get update -y && \
     apt-get install -y vim libpq-dev pkg-config cmake openssl wget git dos2unix && \
