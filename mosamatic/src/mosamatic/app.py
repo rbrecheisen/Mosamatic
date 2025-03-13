@@ -16,10 +16,6 @@ def run_server():
     
     os.chdir(appPath)
     
-    print('##############################################################################')
-    print('#                      M Y   D J A N G O   A P P                             #')
-    print('##############################################################################')
-    
     execute_from_command_line(['manage.py', 'makemigrations'])
     execute_from_command_line(['manage.py', 'migrate'])
     execute_from_command_line(['manage.py', 'create_admin_user'])

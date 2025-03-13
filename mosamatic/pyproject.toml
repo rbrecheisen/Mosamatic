@@ -8,13 +8,13 @@ license.file = "LICENSE"
 author = "Ralph Brecheisen"
 author_email = "ralph.brecheisen@gmail.com"
 
-[tool.briefcase.app.mydjangoapp]
+[tool.briefcase.app.mosamatic]
 formal_name = "My Django App"
 description = "Template project for Django app"
 long_description = """More details about the app should go here.
 """
 sources = [
-    "src/mydjangoapp",
+    "src/mosamatic",
 ]
 test_sources = [
     "tests",
@@ -35,18 +35,18 @@ test_requires = [
     "pytest-django",
 ]
 
-[tool.briefcase.app.mydjangoapp.macOS]
+[tool.briefcase.app.mosamatic.macOS]
 universal_build = true
 requires = [
     # Add your macOS-specific app requirements here
 ]
 
-[tool.briefcase.app.mydjangoapp.linux]
+[tool.briefcase.app.mosamatic.linux]
 requires = [
     # Add your Linux-specific app requirements here
 ]
 
-[tool.briefcase.app.mydjangoapp.linux.system.debian]
+[tool.briefcase.app.mosamatic.linux.system.debian]
 system_requires = [
     # Add any system packages needed at build the app here
 ]
@@ -55,7 +55,7 @@ system_runtime_requires = [
     # Add any system packages needed at runtime here
 ]
 
-[tool.briefcase.app.mydjangoapp.linux.system.rhel]
+[tool.briefcase.app.mosamatic.linux.system.rhel]
 system_requires = [
     # Add any system packages needed at build the app here
 ]
@@ -64,7 +64,7 @@ system_runtime_requires = [
     # Add any system packages needed at runtime here
 ]
 
-[tool.briefcase.app.mydjangoapp.linux.system.suse]
+[tool.briefcase.app.mosamatic.linux.system.suse]
 system_requires = [
     # Add any system packages needed at build the app here
 ]
@@ -73,7 +73,7 @@ system_runtime_requires = [
     # Add any system packages needed at runtime here
 ]
 
-[tool.briefcase.app.mydjangoapp.linux.system.arch]
+[tool.briefcase.app.mosamatic.linux.system.arch]
 system_requires = [
     # Add any system packages needed at build the app here
 ]
@@ -82,24 +82,24 @@ system_runtime_requires = [
     # Add any system packages needed at runtime here
 ]
 
-[tool.briefcase.app.mydjangoapp.linux.flatpak]
+[tool.briefcase.app.mosamatic.linux.flatpak]
 flatpak_runtime = "org.freedesktop.Platform"
 flatpak_runtime_version = "24.08"
 flatpak_sdk = "org.freedesktop.Sdk"
 
-[tool.briefcase.app.mydjangoapp.windows]
+[tool.briefcase.app.mosamatic.windows]
 requires = [
     # Add your Windows-specific app requirements here
 ]
 
 # Mobile deployments
-[tool.briefcase.app.mydjangoapp.iOS]
+[tool.briefcase.app.mosamatic.iOS]
 supported = false
 
-[tool.briefcase.app.mydjangoapp.android]
+[tool.briefcase.app.mosamatic.android]
 supported = false
 
 # Web deployments
-[tool.briefcase.app.mydjangoapp.web]
+[tool.briefcase.app.mosamatic.web]
 supported = false
 

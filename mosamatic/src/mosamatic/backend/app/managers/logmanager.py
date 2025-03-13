@@ -2,7 +2,7 @@ import logging
 
 from ..models import LogOutputModel
 
-LOG = logging.getLogger('mydjangoapp')
+LOG = logging.getLogger('mosamatic')
 
 
 class LogManager:

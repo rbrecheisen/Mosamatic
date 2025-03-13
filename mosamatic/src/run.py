@@ -1,4 +1,4 @@
-from mydjangoapp.app import main
+from mosamatic.app import main
 
 
 if __name__ == '__main__':

@@ -2,7 +2,7 @@ services:
 
   db:
     image: postgres:16-alpine
-    container_name: mydjangoapp_postgres
+    container_name: mosamatic_postgres
     environment:
       - POSTGRES_DB=db
       - POSTGRES_USER=root
@@ -17,48 +17,48 @@ services:
     ports:
       - 5432:5432  # Required for running Django outside Docker but using PostgreSQL
     volumes:
-      - mydjangoapp_postgres_data:/var/lib/postgresql/data
+      - mosamatic_postgres_data:/var/lib/postgresql/data
 
   nginx:
     build: ./nginx
-    image: brecheisen/mydjangoapp-nginx-intel:latest
+    image: brecheisen/mosamatic-nginx-intel:latest
     platform: linux/amd64
-    container_name: mydjangoapp_nginx
+    container_name: mosamatic_nginx
     ports:
       - 8000:8000
     volumes:
-      - mydjangoapp_data:/data
+      - mosamatic_data:/data
     depends_on:
       - web
 
   web:
     build: .
-    image: brecheisen/mydjangoapp-web-intel:latest
+    image: brecheisen/mosamatic-web-intel:latest
     platform: linux/amd64
-    container_name: mydjangoapp_web
+    container_name: mosamatic_web
     environment:
       - DATA_DIR=/data
       - POSTGRES_DB=db
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=foobar
-      - POSTGRES_HOST=mydjangoapp_postgres # When you run Django in Docker set the host
+      - POSTGRES_HOST=mosamatic_postgres # When you run Django in Docker set the host
       - POSTGRES_PORT=5432
       - DOCKER=1
       - ADMIN_USER=admin
       - ADMIN_PASSWORD=admin
       - SECRET_KEY=f9sd7f97sdf89as7fd98as7d9f7sad9f
     volumes:
-      - mydjangoapp_data:/data
+      - mosamatic_data:/data
       # Mount this directory to allow Django to access pipeline data
-      - D:\\Mosamatic\\DjangoTemplate\\ExamplePipeline\\input:/pipeline_data/input
+      # - D:\\Mosamatic\\DjangoTemplate\\ExamplePipeline\\input:/pipeline_data/input
     depends_on:
       db:
         condition: service_healthy
 
 volumes:
-  mydjangoapp_data:
-  mydjangoapp_postgres_data:
+  mosamatic_data:
+  mosamatic_postgres_data:
 
 networks:
   default:
-    name: mydjangoapp
+    name: mosamatic
