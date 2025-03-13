@@ -1,0 +1,15 @@
+# Common packages
+briefcase
+django
+django-jinja
+django-session-security
+django-guardian
+django-crispy-forms
+crispy-bootstrap5
+pendulum
+pytest
+pytest-django
+
+# Required for Docker
+psycopg2-binary
+gunicorn
