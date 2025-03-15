@@ -1,4 +1,5 @@
 import os
+import uuid
 import time
 import warnings
 import math
@@ -46,6 +47,14 @@ def duration(seconds: int) -> str:
     remainder = remainder - m * 60
     s = int(math.floor(remainder))
     return '{} hours, {} minutes, {} seconds'.format(h, m, s)
+
+
+def is_uuid(value):
+    try:
+        uuid.UUID(str(value))
+        return True
+    except ValueError:
+        return False
 
 
 def is_dicom(f: str) -> bool:

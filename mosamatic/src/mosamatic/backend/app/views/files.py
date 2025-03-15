@@ -23,7 +23,7 @@ def file(request, fileset_id, file_id):
 
 
 @login_required
-def png(request, fileset_id, file_id):
+def pngfile(request, fileset_id, file_id):
     if request.method == 'GET':
         f = FileModel.objects.get(pk=file_id)
         return render(request, 'file.html', context={'file': f, 'file_type': 'png', 'fileset_id': fileset_id})
@@ -31,7 +31,7 @@ def png(request, fileset_id, file_id):
 
 
 @login_required
-def csv(request, fileset_id, file_id):
+def csvfile(request, fileset_id, file_id):
     if request.method == 'GET':
         f = FileModel.objects.get(pk=file_id)
         file_path = os.path.join(settings.MEDIA_ROOT, f.path())
@@ -48,7 +48,7 @@ def csv(request, fileset_id, file_id):
 
 
 @login_required
-def txt(request, fileset_id, file_id):
+def textfile(request, fileset_id, file_id):
     if request.method == 'GET':
         f = FileModel.objects.get(pk=file_id)
         file_path = os.path.join(settings.MEDIA_ROOT, f.path())

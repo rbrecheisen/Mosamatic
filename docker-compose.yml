@@ -21,7 +21,7 @@ services:
 
   nginx:
     build: ./nginx
-    image: brecheisen/mosamatic-nginx-intel:latest
+    image: brecheisen/mosamatic-nginx-intel:${VERSION}
     platform: linux/amd64
     container_name: mosamatic_nginx
     ports:
@@ -33,11 +33,12 @@ services:
 
   web:
     build: .
-    image: brecheisen/mosamatic-web-intel:latest
+    image: brecheisen/mosamatic-web-intel:${VERSION}
     platform: linux/amd64
     container_name: mosamatic_web
     environment:
       - DATA_DIR=/data
+      - VERSION=${VERSION}
       - POSTGRES_DB=db
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=foobar

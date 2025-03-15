@@ -1,7 +1,7 @@
 {
     "pipeline_name": "BasicPipeline",
-    "input": "D:\\Mosamatic\\DjangoTemplate\\ExamplePipeline\\input",
-    "output": "D:\\Mosamatic\\DjangoTemplate\\ExamplePipeline\\output",
+    "input": "D:\\Mosamatic\\Mosamatic\\BasicPipeline\\input",
+    "output": "D:\\Mosamatic\\Mosamatic\\BasicPipeline\\output",
     "tasks": [
         {
             "name": "DecompressDicomFilesTask",
@@ -9,7 +9,7 @@
                 "images": "__pipeline.input__"
             },
             "outputs": {
-                "output": "D:\\Mosamatic\\DjangoTemplate\\ExamplePipeline\\DecompressDicomFilesTask"
+                "output": "D:\\Mosamatic\\Mosamatic\\BasicPipeline\\DecompressDicomFilesTask"
             },
             "params": null
         },
@@ -19,7 +19,7 @@
                 "images": "__DecompressDicomFilesTask.outputs.output__"
             },
             "outputs": {
-                "output": "D:\\Mosamatic\\DjangoTemplate\\ExamplePipeline\\RescaleDicomFilesTask"
+                "output": "D:\\Mosamatic\\Mosamatic\\BasicPipeline\\RescaleDicomFilesTask"
             },
             "params": {
                 "target_size": 512
@@ -32,7 +32,7 @@
                 "model_files": "D:\\Mosamatic\\TensorFlowModelFiles"
             },
             "outputs": {
-                "segmentations": "D:\\Mosamatic\\DjangoTemplate\\ExamplePipeline\\MuscleFatSegmentationL3Task"
+                "segmentations": "D:\\Mosamatic\\Mosamatic\\BasicPipeline\\MuscleFatSegmentationL3Task"
             },
             "params": {
                 "model_type": "tensorflow",

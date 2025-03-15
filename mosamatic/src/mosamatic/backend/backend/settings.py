@@ -14,6 +14,11 @@ SECRET_KEY = os.getenv(
 
 DOCKER = True if os.getenv('DOCKER') == '1' else False
 
+VERSION = os.getenv('VERSION', None)
+if VERSION is None:
+    with open(os.path.join(BASE_DIR.parent, 'resources', 'VERSION'), 'r') as f:
+        VERSION = f.readline().strip()
+
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8000', 
 ]
@@ -68,6 +73,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'app.context.version',
             ],
         },
     },

@@ -2,6 +2,7 @@
 [tool.briefcase]
 project_name = "Mosamatic"
 bundle = "com.rbeesoft"
+icon = "src/mosamatic/resources/letter-m"
 version = "0.0.1"
 url = "https://mosamatic.rbeesoft.nl/wordpress/"
 license.file = "LICENSE"

@@ -17,6 +17,7 @@
                 <div class="card-body">
                     {% if user == fileset.owner or user.is_staff %}
                         <form action="/filesets/{{ fileset.id }}/rename" method="post">
+                            {% csrf_token %}
                             <input type="hidden" name="action" value="rename">
                             <input type="text" class="form-control" placeholder="Enter new name" name="new_name"><br>
                             <button class="btn btn-primary">Rename</button>

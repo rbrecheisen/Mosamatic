@@ -5,6 +5,7 @@ from ..tasks.taskregistry import TASK_REGISTRY
 from ..singleton import singleton
 from ..managers.datamanager import DataManager
 from ..managers.logmanager import LogManager
+from ..utils import is_uuid
 
 LOG = LogManager()
 
@@ -32,9 +33,10 @@ class TaskManager:
             inputs = {}
             for name in input_fileset_ids.keys():
                 fileset_id = input_fileset_ids[name]
-                fileset = data_manager.fileset(fileset_id)
-                if fileset:
-                    inputs[name] = [f.path() for f in fileset.files()]
+                if is_uuid(fileset_id):
+                    fileset = data_manager.fileset(fileset_id)
+                    if fileset:
+                        inputs[name] = [f.path() for f in fileset.files()]
             # Get output directories
             output_dirs = {}
             output_fileset_ids = []
@@ -88,7 +90,7 @@ class TaskManager:
     # PIPELINES
 
     def pipeline_names(self):
-        return ['ExamplePipeline']
+        return ['BasicPipeline']
 
     def run_pipeline(self, config):
         # Define inline function to resolve file and directory paths
