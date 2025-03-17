@@ -17,6 +17,7 @@ TASK_REGISTRY = {
         'inputs': [{'name': 'images', 'label': 'Select images'}],
         'outputs': [{'name': 'output', 'label': 'Enter name for output (optional)'}],
         'params': [],
+        'visible': True,
     },
 
     'RescaleDicomFilesTask': {
@@ -25,7 +26,8 @@ TASK_REGISTRY = {
         'description': 'Task that rescales DICOM images to a target size (default: 512)',
         'inputs': [{'name': 'images', 'label': 'Select images'}],
         'outputs': [{'name': 'output', 'label': 'Enter name for output (optional)'}],
-        'params': [{'name': 'target_size', 'label': 'Target size', 'type': 'int', 'value': 512}]
+        'params': [{'name': 'target_size', 'label': 'Target size', 'type': 'int', 'value': 512}],
+        'visible': True,
     },
 
     'MuscleFatSegmentationL3Task': {
@@ -40,7 +42,8 @@ TASK_REGISTRY = {
         'params': [
             {'name': 'model_type', 'label': 'Select model type', 'type': 'select', 'options': ['tensorflow', 'torch']},
             {'name': 'model_version', 'label': 'Select model version', 'type': 'select', 'options': [1.0]},
-        ]
+        ],
+        'visible': True,
     },
     
     'CalculateMetricsTask': {
@@ -54,6 +57,7 @@ TASK_REGISTRY = {
         ],
         'outputs': [{'name': 'metrics', 'label': 'Enter name for metrics output (optional)'}],
         'params': [],
+        'visible': True,
     },
 
     'CreatePngsFromSegmentationsTask': {
@@ -66,5 +70,6 @@ TASK_REGISTRY = {
             {'name': 'fig_width', 'label': 'Figure width', 'type': 'int', 'value': 10},
             {'name': 'fig_height', 'label': 'Figure height', 'type': 'int', 'value': 10},
         ],
+        'visible': True,
     },
 }

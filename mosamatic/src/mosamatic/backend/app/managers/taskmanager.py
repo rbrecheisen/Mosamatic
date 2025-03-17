@@ -23,7 +23,11 @@ class TaskManager:
         return sorted_tasks
     
     def task_names(self):
-        return sorted(TASK_REGISTRY.keys())
+        task_names = []
+        for task_name in sorted(TASK_REGISTRY.keys()):
+            if TASK_REGISTRY[task_name]['visible']:
+                task_names.append(task_name)
+        return task_names
     
     def run_task(self, task_name, input_fileset_ids, output_fileset_names, params, user, wait_to_finish=False):
         task_info = TASK_REGISTRY.get(task_name, None)
