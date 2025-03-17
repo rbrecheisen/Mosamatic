@@ -1,30 +1,27 @@
-# This project was generated with 0.3.22 using template: https://github.com/beeware/briefcase-template@v0.3.22
 [tool.briefcase]
 project_name = "Mosamatic"
 bundle = "com.rbeesoft"
 icon = "src/mosamatic/resources/letter-m"
-version = "0.0.1"
+version = "1.0"
 url = "https://mosamatic.rbeesoft.nl/wordpress/"
-license.file = "LICENSE"
 author = "Ralph Brecheisen"
 author_email = "ralph.brecheisen@gmail.com"
+
+[tool.briefcase.license]
+file = "LICENSE"
 
 [tool.briefcase.app.mosamatic]
 formal_name = "Mosamatic"
 description = "Tool for body composition analysis"
-long_description = """"""
-
+long_description = ""
 console_app = true
-
 sources = [
     "src/mosamatic",
     "src/models.py",
 ]
-
 test_sources = [
     "tests",
 ]
-
 requires = [
     "django",
     "django-jinja",
@@ -45,7 +42,6 @@ requires = [
     "torchvision",
     "opencv-python",
 ]
-
 test_requires = [
     "pytest",
     "pytest-django",
@@ -53,50 +49,26 @@ test_requires = [
 
 [tool.briefcase.app.mosamatic.macOS]
 universal_build = true
-requires = [
-    # Add your macOS-specific app requirements here
-]
+requires = []
 
 [tool.briefcase.app.mosamatic.linux]
-requires = [
-    # Add your Linux-specific app requirements here
-]
+requires = []
 
 [tool.briefcase.app.mosamatic.linux.system.debian]
-system_requires = [
-    # Add any system packages needed at build the app here
-]
-
-system_runtime_requires = [
-    # Add any system packages needed at runtime here
-]
+system_requires = []
+system_runtime_requires = []
 
 [tool.briefcase.app.mosamatic.linux.system.rhel]
-system_requires = [
-    # Add any system packages needed at build the app here
-]
-
-system_runtime_requires = [
-    # Add any system packages needed at runtime here
-]
+system_requires = []
+system_runtime_requires = []
 
 [tool.briefcase.app.mosamatic.linux.system.suse]
-system_requires = [
-    # Add any system packages needed at build the app here
-]
-
-system_runtime_requires = [
-    # Add any system packages needed at runtime here
-]
+system_requires = []
+system_runtime_requires = []
 
 [tool.briefcase.app.mosamatic.linux.system.arch]
-system_requires = [
-    # Add any system packages needed at build the app here
-]
-
-system_runtime_requires = [
-    # Add any system packages needed at runtime here
-]
+system_requires = []
+system_runtime_requires = []
 
 [tool.briefcase.app.mosamatic.linux.flatpak]
 flatpak_runtime = "org.freedesktop.Platform"
@@ -104,18 +76,13 @@ flatpak_runtime_version = "24.08"
 flatpak_sdk = "org.freedesktop.Sdk"
 
 [tool.briefcase.app.mosamatic.windows]
-requires = [
-    # Add your Windows-specific app requirements here
-]
+requires = []
 
-# Mobile deployments
 [tool.briefcase.app.mosamatic.iOS]
 supported = false
 
 [tool.briefcase.app.mosamatic.android]
 supported = false
 
-# Web deployments
 [tool.briefcase.app.mosamatic.web]
 supported = false
-
