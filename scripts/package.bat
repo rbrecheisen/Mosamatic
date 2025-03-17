@@ -4,6 +4,10 @@ setlocal
 
 copy /Y VERSION mosamatic\src\mosamatic\resources
 
+set /p VERSION=<VERSION
+
+python scripts\updatetomlversion.py %VERSION%
+
 cd mosamatic
 
 rmdir /s /q "build"
