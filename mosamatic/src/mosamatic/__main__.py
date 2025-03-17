@@ -12,8 +12,7 @@ def open_browser():
         print(i)
     webbrowser.open('http://localhost:8000')
 
-threading.Thread(target=open_browser).start()
-
 
 if __name__ == "__main__":
+    threading.Thread(target=open_browser).start()
     main()
