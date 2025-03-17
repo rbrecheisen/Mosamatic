@@ -1,4 +1,19 @@
+import webbrowser
+import threading
+import time
+
 from mosamatic.app import main
+
+
+def open_browser():
+    print('Waiting 5 seconds before opening webbrowser...')
+    for i in range(5):
+        time.sleep(1)
+        print(i)
+    webbrowser.open('http://localhost:8000')
+
+threading.Thread(target=open_browser).start()
+
 
 if __name__ == "__main__":
     main()
