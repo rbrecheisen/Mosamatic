@@ -36,8 +36,6 @@ def go_back(request):
 
 
 def help_page(request, page):
-    if page == 'None' or page is None:
-        page = 'index'
     return render(request, f'help/{page}.html', context={'previous': request.GET.get('previous', None)})
 
 
