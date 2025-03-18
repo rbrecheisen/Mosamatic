@@ -34,14 +34,36 @@
     or laptop this is fine. If you are hosting the application on a centralized server and want to allow multiple users
     to access it, you need to create additional accounts in the administrator pages.<br>
     <br>
-    After you login, you will see the Filesets page. This is the starting page of Mosamatic™ and allows you to upload
-    and view all Filesets available in your user account. Whenever you upload a new Fileset, it will be linked to your
-    user account (in this case "admin"). If another user were to login, she would not see your Filesets.<br>
-    Figure X illustrates a single uploaded Fileset called input. 
+    After you login, you will see the Filesets page, initially empty (Figure X). This is the starting page of Mosamatic™ 
+    and allows you to upload and view all Filesets available in your user account. Whenever you upload a new Fileset, 
+    it will be linked to your user account (in this case "admin"). If another user were to login, she would NOT see 
+    your Filesets.<br>
+    <br>
+    <img src="{% static 'help/images/mm_manual_filesets_page.png' %}" width="400px;">
+    <br>
+    Click <b>Choose Files</b> and navivate to the directory where your DICOM images are stored. In this directory you need to
+    select each DICOM image you want to upload. Multiple selection is allowed (see Figure X).<br>
+    <br>
+    <img src="{% static 'help/images/mm_manual_filesets_page_select_files.png' %}" width="600px;">
+    <br>
+    After selecting the DICOM images, click the <b>Open</b> button in the file dialog window. The <b>Select Files</b> widget will 
+    show the number of DICOM images you have selected. Next, provide a name for the new Fileset. This is not mandatory
+    but recommended to easily distinguish Filesets among each other. Figure X shows a Fileset name <b>input</b>.<br>
+    <br>
+    <img src="{% static 'help/images/mm_manual_filesets_page_upload.png' %}" width="400px;">
+    <br>
+    The Fileset list shows each Fileset available in Mosamatic™. It shows the Fileset name, owner, number of files in the Fileset,
+    time when it was uploaded and one or more commands, e.g., <b>delete</b>. When you click <b>delete</b> the Fileset will be 
+    deleted.<br>
+    <br>
+    When you click on the Fileset name (it is a hyperlink) you will see a page showing the individual files in this Fileset 
+    (see Figure X). The files can be clicked as well if Mosamatic™ recognizes their type. For example, PNG images have the 
+    extension .png and can be viewed directly in the browser. Text (.txt) and JSON (.json) files can be viewed as plain text 
+    in the browser as well. CSV (.csv) files can also be viewed and will be automatically rendered as a table (see Figure X).<br>
+    <br>
+    <!-- <img src="{% static 'help/images/mm_manual_filesets_page_upload.png' %}" width="400px;"> -->
     <br>
 
-    <img src="{% static 'help/images/mm_manual_filesets_page_upload.png' %}" width="600px;">
-    <br>
 
     <h4>2. Tasks and filesets</h4>
     The design of Mosamatic™ is based on <b>Tasks</b> with <b>Parameters</b> that work on <b>Filesets</b>. A Task takes one or 
