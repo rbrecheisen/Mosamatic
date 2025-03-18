@@ -3,8 +3,6 @@
 setlocal
 
 if "%*"=="" (
-    echo "Usage: run.bat [--test|--docker]"
-    pause
     set START_DIR=%CD%
     cd mosamatic
     call briefcase dev
@@ -20,6 +18,8 @@ for %%A in (%*) do (
         cd mosamatic
         call briefcase dev --test
         cd %START_DIR%
+    ) else if /I "%%A"=="--usage" (
+        echo "Usage: run.bat [--test|--docker]"
     )
 )
 

@@ -1,54 +1,33 @@
-{% extends "../base.html" %}
-{% load extra_filters %}
+{% extends "help/base.html" %}
 {% load static %}
-{% block content %}
-<div class="container-fluid bg-light text-secondary">
-    <div class="row">
-        <div class="col-sm-10">
-            <div class="card" style="margin-top: 10px;">
-                <div class="card-header">
-                    <h1 class="card-title">Mosamatic user documentation</h1>
-                </div>
-                <div class="card-body">
-                    <table width="1000px">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    Welcome to the Mosamatic user documentation. Here you will find 
-                                    everything you need to get started with Mosamatic. If you are able to view this 
-                                    page, you at least have managed to get Mosamatic running.<br>
-                                    <br>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    In the following pages we will explain how to perform a basic workflow of
-                                    processing CT images acquired at L3 level and calculate body composition, i.e.,
-                                    muscle and fat, metrics from these images. Please, check out the different
-                                    sub-pages for more details:<br>
-                                    <br>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <ol class="list-group list-group-numbered">
-                                        <li class="list-group-item">Upload DICOM images</li>
-                                        <li class="list-group-item">Upload AI segmentation model files</li>
-                                        <li class="list-group-item">Decompress DICOM images</li>
-                                        <li class="list-group-item">Rescale DICOM images</li>
-                                        <li class="list-group-item">Extract muscle/fat regions from DICOM images</li>
-                                        <li class="list-group-item">Calculate body composition metrics</li>
-                                        <li class="list-group-item">Generate PNG images from results</li>
-                                    </ol>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <br>
-                    <img src="{% static 'images/mm_index_segmentations.png' %}">
-                </div>
-            </div>
-        </div>
-    </div>
+{% block help_content %}
+<div>
+    <h2>Home</h2>
+    Welcome to the documentation page of Mosamatic™, the best-validated tool for body composition
+    analysis and brought to you by the Surgery Department of Maastricht University Hospital, The
+    Netherlands.<br>
+    In these pages you can find out what Mosamatic™ can do for you and how. You wil find detailed
+    instructions for working with the tool on your own images.<br>
+    <br>
+    We also provide the bibliography reference to our paper in the Britisch Journal of Radiology (BJR). 
+    Please make sure to cite it whenever you write a publication using Mosamatic™. Note that 
+    Mosamatic™ is a registered trademark.<br>
+    <br>
+    <a href="/help/background?previous=index">1. Background and motivation</a><br>
+    <br>
+    <a href="/help/manual?previous=index">2. User manual</a><br>
+    <br>
+    <ul>
+        <li>Upload DICOM images</li>
+        <li>Upload AI segmentation model files</li>
+        <li>Decompress DICOM images</li>
+        <li>Rescale DICOM images</li>
+        <li>Extract muscle/fat regions from DICOM images</li>
+        <li>Calculate body composition metrics</li>
+        <li>Generate PNG images from results</li>
+    </ol>
+    <br>
+    <br>
+    <img src="{% static 'help/images/mm_index_segmentations.png' %}">    
 </div>
 {% endblock %}
