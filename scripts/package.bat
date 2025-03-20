@@ -6,6 +6,9 @@ copy /Y VERSION mosamatic\src\mosamatic\resources
 
 set /p VERSION=<VERSION
 
+echo This will package version %VERSION% of Mosamatic
+pause
+
 python scripts\updatetomlversion.py %VERSION%
 
 cd mosamatic
