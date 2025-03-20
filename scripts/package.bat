@@ -7,7 +7,7 @@ copy /Y VERSION mosamatic\src\mosamatic\resources
 set /p VERSION=<VERSION
 
 echo This will package version %VERSION% of Mosamatic
-pause
+pausep
 
 python scripts\updatetomlversion.py %VERSION%
 
@@ -19,6 +19,7 @@ rmdir /s /q "dist"
 briefcase create
 briefcase build
 
+echo Removing TensorFlow includes, db.sqlite3 and migrations...
 rmdir /s /q "build\mosamatic\windows\app\src\app_packages\tensorflow\include"
 del /q "build\mosamatic\windows\app\src\app\mosamatic\backend\db.sqlite3"
 del /q "build\mosamatic\windows\app\src\app\mosamatic\backend\app\migrations\*.py"
