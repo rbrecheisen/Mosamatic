@@ -38,14 +38,22 @@ def run_server():
 
     # Run server in separate process and wait for its launch to finish
     # before launching the web browser
-    process = subprocess.Popen([sys.executable, 'manage.py', 'runserver', '0.0.0.0:8000'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    process = subprocess.Popen(
+        [sys.executable, 'manage.py', 'runserver', '0.0.0.0:8000'], 
+        cwd=appPath, 
+        stdout=subprocess.PIPE, 
+        stderr=subprocess.PIPE
+    )
 
-    if wait_for_server('127.0.0.1', 8000):
-        webbrowser.open('http://localhost:8000')
-    else:
-        print('Waiting for server timed out...')
-
-    process.wait()
+    try:
+        if wait_for_server('127.0.0.1', 8000):
+            webbrowser.open('http://localhost:8000')
+        else:
+            print('Waiting for server timed out...')
+        process.wait()
+    except KeyboardInterrupt:
+        process.terminate()
+        process.wait()
 
 
 def main():
