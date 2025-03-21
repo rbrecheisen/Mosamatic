@@ -1,22 +1,22 @@
 import os
 import sys
-import subprocess
 import socket
 import time
+import subprocess
 import webbrowser
 
 from django.core.management import execute_from_command_line
 
 
-def wait_for_server(host, port, timeout=30):
-    start = time.time()
-    while time.time() - start < timeout:
-        try:
-            with socket.create_connection((host, port), timeout=1):
-                return True
-        except OSError:
-            time.sleep(1)
-    return False
+# def wait_for_server(host, port, timeout=30):
+#     start = time.time()
+#     while time.time() - start < timeout:
+#         try:
+#             with socket.create_connection((host, port), timeout=1):
+#                 return True
+#         except OSError:
+#             time.sleep(1)
+#     return False
 
 
 def run_server():
@@ -44,7 +44,7 @@ def run_server():
     #     stderr=subprocess.PIPE
     # )
     # try:
-    #     if wait_for_server('localhost', 8000):
+    #     if wait_for_server('127.0.0.1', 8000):
     #         webbrowser.open('http://localhost:8000')
     #     else:
     #         print('Waiting for server timed out...')

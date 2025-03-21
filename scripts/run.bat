@@ -19,7 +19,7 @@ for %%A in (%*) do (
         call briefcase dev --test
         cd %START_DIR%
     ) else if /I "%%A"=="--usage" (
-        echo "Usage: run.bat [--test|--docker]"
+        echo "Usage: run.bat [--usage|--test|--docker|--delete-db]"
     ) else if /I "%%A"=="--delete-db" (
         del /q mosamatic\src\mosamatic\backend\db.sqlite3
         set START_DIR=%CD%
