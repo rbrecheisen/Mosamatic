@@ -14,7 +14,8 @@ from django.core.management import execute_from_command_line
 #         try:
 #             with socket.create_connection((host, port), timeout=1):
 #                 return True
-#         except OSError:
+#         except OSError as e:
+#             print(f'Socket error: {e}')
 #             time.sleep(1)
 #     return False
 
@@ -38,10 +39,10 @@ def run_server():
     execute_from_command_line(['manage.py', 'runserver', '0.0.0.0:8000'])
 
     # process = subprocess.Popen(
-    #     [sys.executable, 'manage.py', 'runserver', 'localhost:8000'], 
+    #     [sys.executable, 'manage.py', 'runserver', '0.0.0.0:8000'], 
     #     cwd=appPath, 
-    #     stdout=subprocess.PIPE, 
-    #     stderr=subprocess.PIPE
+    #     stdout=None, #stdout=subprocess.PIPE, 
+    #     stderr=None, #stderr=subprocess.PIPE
     # )
     # try:
     #     if wait_for_server('127.0.0.1', 8000):
@@ -50,7 +51,7 @@ def run_server():
     #         print('Waiting for server timed out...')
     #     process.wait()
     # except KeyboardInterrupt:
-    #     process.terminate()
+    #     process.terminate()    
     #     process.wait()
 
 
