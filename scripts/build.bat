@@ -17,8 +17,8 @@ for %%A in (%*) do (
         call scripts\shutdown.bat
         docker-compose build --no-cache
         docker system prune -f
-    ) else if /I "%%A"=="--usage" (
-        echo "Usage: build.bat [--usage|--docker]"
+    ) else if /I "%%A"=="--help" (
+        echo "Usage: build.bat [--help|--docker]"
     )
 )
 
