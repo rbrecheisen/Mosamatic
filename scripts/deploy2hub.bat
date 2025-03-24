@@ -15,6 +15,6 @@ git push origin %VERSION%
 docker logout
 type C:\\Users\\r.brecheisen\\dockerhub.txt | docker login --username brecheisen --password-stdin
 docker push brecheisen/mosamatic-nginx-intel:%VERSION%
-docker push brecheisen/mosamatic-backend-intel:%VERSION%
+docker push brecheisen/mosamatic-web-intel:%VERSION%
 
 endlocal
