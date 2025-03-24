@@ -38,7 +38,7 @@ services:
     container_name: mosamatic_web
     environment:
       - DATA_DIR=/data
-      - VERSION=${VERSION}
+      - VERSION=1.0
       - POSTGRES_DB=db
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=foobar
