@@ -63,6 +63,6 @@ def download_fileset(request, fileset_id):
         zip_file_path = data_manager.create_zip_file_from_fileset(fileset)
         with open(zip_file_path, 'rb') as f:
             response = HttpResponse(FileWrapper(f), content_type='application/zip')
-            response['Content-Disposition'] = 'attachment; filename="{}.zip"'.format(fileset.name)
+            response['Content-Disposition'] = 'attachment; filename="{}.zip"'.format(fileset.name())
         return response
     return HttpResponseForbidden(f'Wrong method ({request.method})')
