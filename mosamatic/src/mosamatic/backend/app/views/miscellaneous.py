@@ -21,24 +21,6 @@ def custom_logout(request: HttpRequest) -> HttpResponse:
     return redirect('/')
 
 
-def help(request):
-    return render(request, 'help/index.html')
-
-
-def go_back(request):
-    history = request.session.get('history', None)
-    if history:
-        history.pop()
-        if history:
-            request.session['history'] = history
-            return redirect(history[-1])
-    return redirect('/help/')
-
-
-def help_page(request, page):
-    return render(request, f'help/{page}.html', context={'previous': request.GET.get('previous', None)})
-
-
 @login_required
 def logs(request: HttpRequest) -> HttpResponse:
     manager = LogManager()
