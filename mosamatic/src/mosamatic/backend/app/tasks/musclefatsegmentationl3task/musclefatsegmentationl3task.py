@@ -1,7 +1,7 @@
 import os
 import numpy as np
 
-import models
+import models_gokul
 
 from ..task import Task
 from .tensorflowmodel import TensorFlowModel

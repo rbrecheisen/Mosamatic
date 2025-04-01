@@ -23,6 +23,7 @@ pynetdicom
 tensorflow==2.15.0
 torch
 torchvision
+torchsummary
 opencv-python
 
 # Required for Docker

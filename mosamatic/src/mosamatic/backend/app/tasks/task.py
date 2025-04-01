@@ -2,9 +2,11 @@ import uuid
 import os
 import datetime
 import threading
+import traceback
 
 from typing import List, Dict, Any
 from enum import Enum
+from django.conf import settings
 
 from ..managers.logmanager import LogManager
 
@@ -88,7 +90,8 @@ class Task(threading.Thread):
                 self.notify_finished()
                 self.set_status(TaskStatus.COMPLETED)
         except Exception as e:
-            self.set_status(TaskStatus.FAILED, str(e))
+            full_trace = traceback.format_exc()
+            self.set_status(TaskStatus.FAILED, full_trace)
 
     def execute(self):
         raise NotImplementedError('Must be implemented in child class')

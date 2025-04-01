@@ -21,7 +21,7 @@ for %%A in (%*) do (
         set START_DIR=%CD%
         cd mosamatic
         del /q "build" "dist"
-        call briefcase create --no-input
+        call briefcase create
         call briefcase build
         call briefcase run
         cd %START_DIR%
