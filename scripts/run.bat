@@ -4,7 +4,7 @@ setlocal
 
 if "%*"=="" (
     echo "Runs Mosamatic"
-    echo "Usage: run.bat [--dev|--build|--test|--docker]"
+    echo "Usage: run.bat [--dev|--build|--test|--docker|--docker-prod]"
     exit /b 1
 )
 
@@ -23,6 +23,7 @@ for %%A in (%*) do (
         del /q "build" "dist"
         call briefcase create --no-input
         call briefcase build
+        call briefcase run
         cd %START_DIR%
 
     ) else if /I "%%A"=="--test" (
@@ -38,9 +39,9 @@ for %%A in (%*) do (
         docker system prune -f
         docker-compose up -d && docker-compose logs -f
 
-    ) else if /I "%%A"=="--production" (
+    ) else if /I "%%A"=="--docker-prod" (
         set /p VERSION=<VERSION
-        call scripts\shutdown.bat --production
+        call scripts\shutdown.bat --docker-prod
         docker-compose -f docker-compose-prod.yml build --no-cache
         docker system prune -f
         docker-compose -f docker-compose-prod.yml up -d

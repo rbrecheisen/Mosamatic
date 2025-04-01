@@ -4,7 +4,7 @@ setlocal
 
 set /p VERSION=<VERSION
 
-if "%*"=="--production" (
+if "%*"=="--docker-prod" (
     docker-compose -f docker-compose-prod.yml down --volumes --remove-orphans
 ) else (
     docker-compose down --volumes --remove-orphans

@@ -3,6 +3,7 @@ from .rescaledicomfilestask.rescaledicomfilestask import RescaleDicomFilesTask
 from .musclefatsegmentationl3task.musclefatsegmentationl3task import MuscleFatSegmentationL3Task
 from .calculatemetricstask.calculatemetricstask import CalculateMetricsTask
 from .createpngsfromsegmentationstask.createpngsfromsegmentationstask import CreatePngsFromSegmentationsTask
+from .runtotalsegmentatortask.runtotalsegmentatortask import RunTotalSegmentatorTask
 
 
 TASK_REGISTRY = {
@@ -11,8 +12,12 @@ TASK_REGISTRY = {
         'class': DecompressDicomFilesTask,
         'title': 'DecompressDicomFilesTask',
         'description': 'Task that decompresses DICOM files if needed',
-        'inputs': [{'name': 'images', 'label': 'Select images'}],
-        'outputs': [{'name': 'output', 'label': 'Enter name for output (optional)'}],
+        'inputs': [
+            {'name': 'images', 'label': 'Select images'},
+        ],
+        'outputs': [
+            {'name': 'output', 'label': 'Enter name for output (optional)'},
+        ],
         'params': [],
         'visible': True,
     },
@@ -21,9 +26,15 @@ TASK_REGISTRY = {
         'class': RescaleDicomFilesTask,
         'title': 'RescaleDicomFilesTask',
         'description': 'Task that rescales DICOM images to a target size (default: 512)',
-        'inputs': [{'name': 'images', 'label': 'Select images'}],
-        'outputs': [{'name': 'output', 'label': 'Enter name for output (optional)'}],
-        'params': [{'name': 'target_size', 'label': 'Target size', 'type': 'int', 'value': 512}],
+        'inputs': [
+            {'name': 'images', 'label': 'Select images'},
+        ],
+        'outputs': [
+            {'name': 'output', 'label': 'Enter name for output (optional)'},
+        ],
+        'params': [
+            {'name': 'target_size', 'label': 'Target size', 'type': 'int', 'value': 512},
+        ],
         'visible': True,
     },
 
@@ -35,7 +46,9 @@ TASK_REGISTRY = {
             {'name': 'images', 'label': 'Select images'},
             {'name': 'model_files', 'label': 'Select model files'},
         ],
-        'outputs': [{'name': 'segmentations', 'label': 'Enter name for segmentation output (optional)'}],
+        'outputs': [
+            {'name': 'segmentations', 'label': 'Enter name for segmentation output (optional)'},
+        ],
         'params': [
             {'name': 'model_type', 'label': 'Select model type', 'type': 'select', 'options': ['tensorflow', 'torch']},
             {'name': 'model_version', 'label': 'Select model version', 'type': 'select', 'options': [1.0]},
@@ -52,7 +65,9 @@ TASK_REGISTRY = {
             {'name': 'segmentations', 'label': 'Select segmentations'},
             {'name': 'patient_heights', 'label': 'Select patient heights file (optional)'},
         ],
-        'outputs': [{'name': 'metrics', 'label': 'Enter name for metrics output (optional)'}],
+        'outputs': [
+            {'name': 'metrics', 'label': 'Enter name for metrics output (optional)'},
+        ],
         'params': [],
         'visible': True,
     },
@@ -61,11 +76,31 @@ TASK_REGISTRY = {
         'class': CreatePngsFromSegmentationsTask,
         'title': 'CreatePngsFromSegmentationsTask',
         'description': 'Task that generates PNG images from muscle and fat annotation output',
-        'inputs': [{'name': 'segmentations', 'label': 'Select segmentations'}],
-        'outputs': [{'name': 'png_images', 'label': 'Enter name for PNG output (optional)'}],
+        'inputs': [
+            {'name': 'segmentations', 'label': 'Select segmentations'},
+        ],
+        'outputs': [
+            {'name': 'png_images', 'label': 'Enter name for PNG output (optional)'},
+        ],
         'params': [
             {'name': 'fig_width', 'label': 'Figure width', 'type': 'int', 'value': 10},
             {'name': 'fig_height', 'label': 'Figure height', 'type': 'int', 'value': 10},
+        ],
+        'visible': True,
+    },
+
+    'RunTotalSegmentatorTask': {
+        'class': RunTotalSegmentatorTask,
+        'title': 'RunTotalSegmentatorTask',
+        'description': 'Task that runs Total Segmentator on a set of CT or MRI scans and outputs all, or selected, organ segmentations',
+        'inputs': [
+            {'name': 'scans', 'label': 'Select scans'},
+        ],
+        'outputs': [
+            {'name': 'segmentations', 'label': 'Enter name for segmentation output (optional)'},
+        ],
+        'params': [
+            {'name': 'structures', 'label': 'Organs/structures', 'type': 'select', 'options': ['all', 'vertebrae_L3']},
         ],
         'visible': True,
     },
