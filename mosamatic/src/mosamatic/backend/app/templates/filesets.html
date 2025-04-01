@@ -11,16 +11,42 @@
             <div class="card" style="margin-top: 10px;">
                 <div class="card-header">Filesets</div>
                 <div class="card-body">
-                    <form action="/filesets/upload" method="post" enctype="multipart/form-data">
+                    <!-- <form id="upload_form" action="/filesets/upload" method="post" enctype="multipart/form-data"> -->
+                    <form id="upload_form" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <label for="files">Select files:</label>
-                        <input type="file" id="files" name="files" multiple/><br>
+                        <!-- <input type="file" id="files" name="files" multiple/><br> -->
+                        <input type="file" id="files" webkitdirectory directory multiple/><br>
                         <br>
                         <label for="fileset_name" class="form-label">Fileset name (optional)</label>
                         <input type="text" class="form-control" id="fileset_name" name="fileset_name" placeholder="Enter name">
                         <br>
                         <button type="submit" class="btn btn-primary">Upload</button>
                     </form>
+
+                    <script>
+                        document.getElementById('upload_form').addEventListener('submit', function(e) {
+                            e.preventDefault();
+                            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+                            const input = document.getElementById('files');
+                            const formData = new FormData();
+                            for(const f of input.files) {
+                                formData.append(f.webkitRelativePath, f);
+                            }
+                            fetch('/filesets/upload', {
+                                method: 'POST',
+                                headers: {'X-CSRFToken': csrfToken},
+                                body: formData
+                            }).then(response => {
+                                if(response.ok) {
+                                    location.reload();
+                                } else {
+                                    alert('Upload failed!');
+                                }
+                            });
+                        });
+                    </script>
+
                     <table class="table">
                         <tr>
                             <th>Name</th>
