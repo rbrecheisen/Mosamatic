@@ -42,6 +42,7 @@ requires = [
     "torchvision",
     "torchsummary",
     "opencv-python",
+    "totalsegmentator",
 ]
 test_requires = [
     "pytest",

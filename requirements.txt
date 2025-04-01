@@ -25,6 +25,7 @@ torch
 torchvision
 torchsummary
 opencv-python
+totalsegmentator
 
 # Required for Docker
 psycopg2-binary
