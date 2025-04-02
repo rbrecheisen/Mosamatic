@@ -37,7 +37,7 @@ for %%A in (%*) do (
         call scripts\shutdown.bat
         docker-compose build --no-cache
         docker system prune -f
-        docker-compose up -d && docker-compose logs -f
+        docker-compose up -d web && docker-compose logs -f
 
     ) else if /I "%%A"=="--docker-prod" (
         set /p VERSION=<VERSION

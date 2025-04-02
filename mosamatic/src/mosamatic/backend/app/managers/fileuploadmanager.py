@@ -13,7 +13,7 @@ LOG = LogManager()
 
 
 class FileUploadManager:
-    def process_upload(self, request: HttpRequest) -> Union[List[str], List[str]]:
+    def process_upload(self, request):
         file_paths = []
         file_names = []
         files = request.POST.getlist('files.path') # Files parameter from NGINX

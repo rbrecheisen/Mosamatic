@@ -48,9 +48,10 @@ services:
       - ADMIN_USER=admin
       - ADMIN_PASSWORD=admin
       - SECRET_KEY=f9sd7f97sdf89as7fd98as7d9f7sad9f
+    ports:
+      - 8001:8001
     volumes:
       - mosamatic_data:/data
-
       # Specify these host directories if you want to use pipelines in Docker
       - D:\\Mosamatic\\DjangoTemplate\\ExamplePipeline\\input:/pipeline_data/input
       - D:\\Mosamatic\\TensorFlowModelFiles:/pipeline_data/TensorFlowModelFiles

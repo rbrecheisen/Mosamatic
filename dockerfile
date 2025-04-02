@@ -18,6 +18,8 @@ RUN dos2unix /docker-entrypoint.sh
 
 COPY mosamatic/src/mosamatic /src
 COPY mosamatic/src/models.py /src/models.py
+# TODO: remove this line later
+COPY mosamatic/src/models_gokul.py /src/models_gokul.py
 
 WORKDIR /src
 
