@@ -105,5 +105,7 @@ class CalculateMetricsTask(Task):
             self.set_progress(step, nr_steps)
         # Build dataframe and return the CSV file as output
         csv_file_path = os.path.join(self.output('metrics'), 'bc_metrics.csv')
+        xls_file_path = os.path.join(self.output('metrics'), 'bc_metrics.xlsx')
         df = pd.DataFrame(data=data)
         df.to_csv(csv_file_path, index=False, sep=';')
+        df.to_excel(pd.ExcelWriter(xls_file_path), index=False)
