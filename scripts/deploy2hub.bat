@@ -4,13 +4,9 @@ setlocal
 
 set /p VERSION=<VERSION
 
-echo "Deployment version will be %VERSION%. Is that correct?"
+echo "Deploying Mosamatic version %VERSION% to DockerHub."
+echo "Is that correct?"
 pause
-
-@REM Pushing to Git and tagging
-git add -A && git commit -m "Release %VERSION%" && git push origin main
-git tag -a %VERSION% -m "Release %VERSION%"
-git push origin %VERSION%
 
 docker logout
 type C:\\Users\\r.brecheisen\\dockerhub.txt | docker login --username brecheisen --password-stdin
