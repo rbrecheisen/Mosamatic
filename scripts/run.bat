@@ -3,7 +3,7 @@
 setlocal
 
 if "%*"=="" (
-    echo "Runs Mosamatic"
+    echo "Runs Mosamatic."
     echo "Usage: run.bat [--dev|--exe|--test|--docker]"
     exit /b 1
 )
