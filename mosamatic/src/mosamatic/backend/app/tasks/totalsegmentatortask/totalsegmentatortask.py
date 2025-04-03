@@ -1,6 +1,6 @@
 from ..task import Task
 
 
-class RunTotalSegmentatorTask(Task):
+class TotalSegmentatorTask(Task):
     def execute(self):
         pass

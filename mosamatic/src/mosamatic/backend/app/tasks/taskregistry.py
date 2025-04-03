@@ -4,7 +4,7 @@ from .musclefatsegmentationl3task.musclefatsegmentationl3task import MuscleFatSe
 from .musclefatsegmentationl3t4task.musclefatsegmentationl3t4task import MuscleFatSegmentationL3T4Task
 from .calculatemetricstask.calculatemetricstask import CalculateMetricsTask
 from .createpngsfromsegmentationstask.createpngsfromsegmentationstask import CreatePngsFromSegmentationsTask
-from .runtotalsegmentatortask.runtotalsegmentatortask import RunTotalSegmentatorTask
+from .totalsegmentatortask.totalsegmentatortask import TotalSegmentatorTask
 
 
 TASK_REGISTRY = {
@@ -107,9 +107,9 @@ TASK_REGISTRY = {
         'visible': True,
     },
 
-    'RunTotalSegmentatorTask': {
-        'class': RunTotalSegmentatorTask,
-        'title': 'RunTotalSegmentatorTask',
+    'TotalSegmentatorTask': {
+        'class': TotalSegmentatorTask,
+        'title': 'TotalSegmentatorTask',
         'description': 'Task that runs Total Segmentator on a set of CT or MRI scans and outputs all, or selected, organ segmentations',
         'inputs': [
             {'name': 'scans', 'label': 'Select scans'},
