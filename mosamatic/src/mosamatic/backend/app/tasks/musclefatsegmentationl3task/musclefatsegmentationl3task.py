@@ -1,21 +1,19 @@
 import os
 import numpy as np
 
-import models_gokul
-
 from ..task import Task
 from .tensorflowmodel import TensorFlowModel
-from .torchmodel import TorchModel
+# from .torchmodel import TorchModel
 from ...utils import load_dicom, normalize_between, get_pixels_from_dicom_object, convert_labels_to_157
 
 
 class MuscleFatSegmentationL3Task(Task):
     def load_models_and_params(self, model_files, model_type, model_version):
-        if model_type == 'torch':
-            torch_model = TorchModel()
-            model, contour_model, params = torch_model.load(model_files, model_version)
-            return model, contour_model, params
-        elif model_type == 'tensorflow':
+        # if model_type == 'torch':
+        #     torch_model = TorchModel()
+        #     model, contour_model, params = torch_model.load(model_files, model_version)
+        #     return model, contour_model, params
+        if model_type == 'tensorflow':
             tensorflow_model = TensorFlowModel()
             model, contour_model, params = tensorflow_model.load(model_files, model_version)
             return model, contour_model, params
@@ -23,11 +21,11 @@ class MuscleFatSegmentationL3Task(Task):
             raise RuntimeError(f'Unknown model type {model_type}')
 
     def predict_contour(self, contour_model, img, params, model_type):
-        if model_type == 'torch':
-            torch_model = TorchModel()
-            mask = torch_model.predict_contour(img, contour_model, params)
-            return mask
-        elif model_type == 'tensorflow':
+        # if model_type == 'torch':
+        #     torch_model = TorchModel()
+        #     mask = torch_model.predict_contour(img, contour_model, params)
+        #     return mask
+        if model_type == 'tensorflow':
             tensorflow_model = TensorFlowModel()
             mask = tensorflow_model.predict_contour(img, contour_model, params)
             return mask
@@ -45,10 +43,10 @@ class MuscleFatSegmentationL3Task(Task):
             img1 = normalize_between(img1, params['min_bound'], params['max_bound'])
             img1 = img1 * mask
         img1 = img1.astype(np.float32)
-        if model_type == 'torch':
-            torch_model = TorchModel()
-            pred_max = torch_model.predict(img1, model)
-        elif model_type == 'tensorflow':
+        # if model_type == 'torch':
+        #     torch_model = TorchModel()
+        #     pred_max = torch_model.predict(img1, model)
+        if model_type == 'tensorflow':
             tensorflow_model = TensorFlowModel()
             pred_max = tensorflow_model.predict(img1, model)
         else:

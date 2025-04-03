@@ -7,6 +7,8 @@ Web tool for body composition analysis from Maastricht University Medical Center
 - Run app in Docker mode (run.bat --docker)
 
 # To-do
-- User manual
-- PyTorch model
+- Remove TensorFlow task + package requirements.txt
+- Update user manual WordPress
 - Automatic slice selection
+
+[x] PyTorch model
