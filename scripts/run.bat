@@ -33,9 +33,7 @@ for %%A in (%*) do (
         cd %START_DIR%
 
     ) else if /I "%%A"=="--docker" (
-        set /p VERSION=<VERSION
         call scripts\shutdown.bat
-        echo "Running production version of Mosamatic..."
         docker-compose -f docker-compose-prod.yml up -d
         docker-compose -f docker-compose-prod.yml logs -f
     )
