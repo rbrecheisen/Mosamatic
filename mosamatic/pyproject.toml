@@ -50,8 +50,9 @@ test_requires = [
 ]
 
 [tool.briefcase.app.mosamatic.macOS]
-universal_build = true
-requires = []
+universal_build = false
+requires = [
+]
 
 [tool.briefcase.app.mosamatic.linux]
 requires = []
@@ -78,7 +79,8 @@ flatpak_runtime_version = "24.08"
 flatpak_sdk = "org.freedesktop.Sdk"
 
 [tool.briefcase.app.mosamatic.windows]
-requires = []
+requires = [
+]
 
 [tool.briefcase.app.mosamatic.iOS]
 supported = false
