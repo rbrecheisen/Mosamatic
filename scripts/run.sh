@@ -21,7 +21,7 @@ elif [ "${1}" == "--test" ]; then
     cd mosamatic
     briefcase dev --test
 elif [ "${1}" == "--docker" ]; then
-    scripts\shutdown.bat
+    scripts/build.sh
     docker-compose -f docker-compose-prod.yml up -d
     docker-compose -f docker-compose-prod.yml logs -f
 else
