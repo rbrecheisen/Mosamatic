@@ -1,6 +1,6 @@
 from .decompressdicomfilestask.decompressdicomfilestask import DecompressDicomFilesTask
 from .rescaledicomfilestask.rescaledicomfilestask import RescaleDicomFilesTask
-from .musclefatsegmentationl3task.musclefatsegmentationl3task import MuscleFatSegmentationL3Task
+# from .musclefatsegmentationl3task.musclefatsegmentationl3task import MuscleFatSegmentationL3Task
 from .musclefatsegmentationl3t4task.musclefatsegmentationl3t4task import MuscleFatSegmentationL3T4Task
 from .calculatemetricstask.calculatemetricstask import CalculateMetricsTask
 from .createpngsfromsegmentationstask.createpngsfromsegmentationstask import CreatePngsFromSegmentationsTask
@@ -39,23 +39,23 @@ TASK_REGISTRY = {
         'visible': True,
     },
 
-    'MuscleFatSegmentationL3Task': {
-        'class': MuscleFatSegmentationL3Task,
-        'title': 'MuscleFatSegmentationL3Task',
-        'description': 'Task that automatically annotates muscle and fat tissue in CT images at L3 level',
-        'inputs': [
-            {'name': 'images', 'label': 'Select images'},
-            {'name': 'model_files', 'label': 'Select model files'},
-        ],
-        'outputs': [
-            {'name': 'segmentations', 'label': 'Enter name for segmentation output (optional)'},
-        ],
-        'params': [
-            {'name': 'model_type', 'label': 'Select model type', 'type': 'select', 'options': ['tensorflow', 'torch']},
-            {'name': 'model_version', 'label': 'Select model version', 'type': 'select', 'options': [1.0]},
-        ],
-        'visible': True,
-    },
+    # 'MuscleFatSegmentationL3Task': {
+    #     'class': MuscleFatSegmentationL3Task,
+    #     'title': 'MuscleFatSegmentationL3Task',
+    #     'description': 'Task that automatically annotates muscle and fat tissue in CT images at L3 level',
+    #     'inputs': [
+    #         {'name': 'images', 'label': 'Select images'},
+    #         {'name': 'model_files', 'label': 'Select model files'},
+    #     ],
+    #     'outputs': [
+    #         {'name': 'segmentations', 'label': 'Enter name for segmentation output (optional)'},
+    #     ],
+    #     'params': [
+    #         {'name': 'model_type', 'label': 'Select model type', 'type': 'select', 'options': ['tensorflow', 'torch']},
+    #         {'name': 'model_version', 'label': 'Select model version', 'type': 'select', 'options': [1.0]},
+    #     ],
+    #     'visible': True,
+    # },
     
     'MuscleFatSegmentationL3T4Task': {
         'class': MuscleFatSegmentationL3T4Task,
