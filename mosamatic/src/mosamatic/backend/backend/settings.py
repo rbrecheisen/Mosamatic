@@ -170,4 +170,6 @@ MEDIA_ROOT = os.path.join(DATA_DIR, 'filesets')
 
 DATA_UPLOAD_MAX_NUMBER_FILES = None
 
+FILE_UPLOAD_MAX_MEMORY_SIZE = 0
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

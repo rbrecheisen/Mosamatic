@@ -27,10 +27,9 @@ def fileset(request, fileset_id):
 @login_required
 def upload_fileset(request):
     if request.method == 'POST':
-        data_manager = DataManager()
         fileset_name = request.POST.get('fileset_name', None)
-        file_paths, file_names = FileUploadManager().process_upload(request)
-        data_manager.create_fileset_from_uploaded_files(request.user, file_paths, file_names, fileset_name)
+        single_fileset = False if request.POST.get('single_fileset', 'true') == 'false' else True
+        FileUploadManager().process_upload(request, fileset_name, single_fileset)
         return redirect('/filesets/')
     return HttpResponseForbidden(f'Wrong method ({request.method})')
 
@@ -51,6 +50,16 @@ def delete_fileset(request, fileset_id):
         data_manager = DataManager()
         fileset = data_manager.fileset(fileset_id)
         data_manager.delete_fileset(fileset)
+        return redirect('/filesets/')
+    return HttpResponseForbidden(f'Wrong method ({request.method})')
+
+
+@login_required
+def delete_all_filesets(request):
+    if request.method == 'GET':
+        data_manager = DataManager()
+        for fileset in data_manager.filesets(request.user):
+            data_manager.delete_fileset(fileset)
         return redirect('/filesets/')
     return HttpResponseForbidden(f'Wrong method ({request.method})')
 

@@ -8,56 +8,68 @@
         </p>
     </div>
     <div class="row">
-        <div class="col-sm-10">
-            <div class="card" style="margin-top: 10px;">
-                <div class="card-header">
-                    Fileset <b>{{ fileset.name }}</b><br>
-                    <i style="font-size: small;">id: {{ fileset.id }}, owner: {{ fileset.owner }}</i>
+        <div class="col-sm-8">
+            <div class="row mb-3">
+                <div class="col">
+                    <div class="card" style="margin-top: 10px;">
+                        <div class="card-header">
+                            Fileset <b>{{ fileset.name }}</b><br>
+                            <i style="font-size: small;">id: {{ fileset.id }}, owner: {{ fileset.owner }}</i>
+                        </div>
+                        <div class="card-body">
+                            {% if user == fileset.owner or user.is_staff %}
+                                <form action="/filesets/{{ fileset.id }}/rename" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="action" value="rename">
+                                    <input type="text" class="form-control" placeholder="Enter new name" name="new_name"><br>
+                                    <button class="btn btn-primary">Rename</button>
+                                </form>
+                                <p><a href="/filesets/{{ fileset.id }}/download">Download dataset</a></p>
+                                <p><a href="/filesets/{{ fileset.id }}/delete">Delete</a></p>
+                            {%  endif %}
+                        </div>
+                    </div>        
                 </div>
-                <div class="card-body">
-                    {% if user == fileset.owner or user.is_staff %}
-                        <form action="/filesets/{{ fileset.id }}/rename" method="post">
-                            {% csrf_token %}
-                            <input type="hidden" name="action" value="rename">
-                            <input type="text" class="form-control" placeholder="Enter new name" name="new_name"><br>
-                            <button class="btn btn-primary">Rename</button>
-                        </form>
-                        <p><a href="/filesets/{{ fileset.id }}/download">Download dataset</a></p>
-                        <p><a href="/filesets/{{ fileset.id }}/delete">Delete</a></p>
-                    {%  endif %}
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <div class="card" style="margin-top: 10px;">
+                        <div class="card-header">Files</b></div>
+                        <div class="card-body">
+                            <p>Files with extension *.png, *.txt, *.json or .*csv can be viewed in the browser. All other file types will be downloaded when clicked.</p>
+                            <br>
+                            <table class="table">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>File size (Kb)</th>
+                                </tr>
+                                {% for f in files %}
+                                    <tr>
+                                        <td>
+                                            {% if f.name|endswith:"png" %}
+                                                <a href="/filesets/{{ fileset.id }}/files/{{ f.id }}/png">{{ f.name }}</a>
+                                            {% elif f.name|endswith:"txt" or f.name|endswith:"json" %}
+                                                <a href="/filesets/{{ fileset.id }}/files/{{ f.id }}/text">{{ f.name }}</a>
+                                            {% elif f.name|endswith:"csv" %}
+                                                <a href="/filesets/{{ fileset.id }}/files/{{ f.id }}/csv">{{ f.name }}</a>
+                                            {% else %}
+                                                <a href="/filesets/{{ fileset.id }}/files/{{ f.id }}">{{ f.name }}</a>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ f.size }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>                            
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-10">
+        <div class="col-sm-4">
             <div class="card" style="margin-top: 10px;">
-                <div class="card-header">Files</b></div>
+                <div class="card-header">Help</div>
                 <div class="card-body">
-                    <p>Files with extension *.png, *.txt, *.json or .*csv can be viewed in the browser. All other file types will be downloaded when clicked.</p>
-                    <br>
-                    <table class="table">
-                        <tr>
-                            <th>Name</th>
-                            <th>File size (Kb)</th>
-                        </tr>
-                        {% for f in files %}
-                            <tr>
-                                <td>
-                                    {% if f.name|endswith:"png" %}
-                                        <a href="/filesets/{{ fileset.id }}/files/{{ f.id }}/png">{{ f.name }}</a>
-                                    {% elif f.name|endswith:"txt" or f.name|endswith:"json" %}
-                                        <a href="/filesets/{{ fileset.id }}/files/{{ f.id }}/text">{{ f.name }}</a>
-                                    {% elif f.name|endswith:"csv" %}
-                                        <a href="/filesets/{{ fileset.id }}/files/{{ f.id }}/csv">{{ f.name }}</a>
-                                    {% else %}
-                                        <a href="/filesets/{{ fileset.id }}/files/{{ f.id }}">{{ f.name }}</a>
-                                    {% endif %}
-                                </td>
-                                <td>{{ f.size }}</td>
-                            </tr>
-                        {% endfor %}
-                    </table>
+                    Some help information
                 </div>
             </div>
         </div>

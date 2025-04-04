@@ -1,5 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
+<div id="spinner" class="d-none">
+  <div class="position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center" style="background-color: rgba(0, 0, 0, 0.25); z-index: 9999;">
+    <div class="spinner-border text-primary" role="status" style="width: 4rem; height: 4rem;">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+</div>
 <div class="container-fluid">
     <div class="row">
         <p style="margin-top: 10px">
@@ -7,68 +14,95 @@
         </p>
     </div>
     <div class="row">
-        <div class="col-sm-10">
+        <div class="col-sm-8">
+            <div class="row mb-3">
+                <div class="col">
+                    <div class="card" style="margin-top: 10px;">
+                        <div class="card-header">Filesets</div>
+                        <div class="card-body">
+                            <form id="upload_form" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <label for="files">Select directory:</label>
+                                <input type="file" id="files" webkitdirectory directory multiple/><br>
+                                <br>
+                                <label for="fileset_name" class="form-label">Fileset name (optional and only for single fileset uploads)</label>
+                                <input type="text" class="form-control" id="fileset_name" name="fileset_name" placeholder="Enter name">
+                                <br>
+                                <input type="checkbox" class="form-check-input" id="single_fileset" checked>
+                                <label class="form-check-label" for="single_fileset">Store files in single fileset</label><br>
+                                <br>    
+                                <button type="submit" class="btn btn-primary">Upload</button>
+                            </form>
+                            <br>
+                            <script>
+                                document.getElementById('upload_form').addEventListener('submit', function(e) {
+                                    e.preventDefault();
+                                    document.getElementById('spinner').classList.remove('d-none');
+                                    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+                                    const input = document.getElementById('files');
+                                    const filesetName = document.getElementById('fileset_name').value;
+                                    const isSingleFileset = document.getElementById('single_fileset').checked;
+                                    const formData = new FormData();
+                                    formData.append('fileset_name', filesetName);
+                                    formData.append('single_fileset', isSingleFileset ? 'true' : 'false');
+                                    for(const f of input.files) {
+                                        formData.append(f.webkitRelativePath, f);
+                                    }
+                                    // Wait 100ms to allow spinner to be shown before uploading files
+                                    setTimeout(() => {
+                                        fetch('/filesets/upload', {
+                                            method: 'POST',
+                                            headers: {'X-CSRFToken': csrfToken},
+                                            body: formData
+                                        }).then(response => {
+                                            if(response.ok) {
+                                                location.reload();
+                                            } else {
+                                                alert('Upload failed!');
+                                                document.getElementById('spinner').classList.add('d-none');
+                                            }
+                                        }).catch(err => {
+                                            alert('Error uploading!');
+                                            document.getElementById('spinner').classList.add('d-none');
+                                        });
+                                    }, 100);
+                                });
+                            </script>
+                            {% if filesets|length > 0 %}
+                                <a style="color: red;" href="/filesets/delete">Delete all filesets</a> (dangerous)<br><br>
+                            {% endif %}
+                            <table class="table">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Owner</th>
+                                    <th>Nr. files</th>
+                                    <th>Uploaded</th>
+                                    <th>Commands</th>
+                                </tr>
+                                {% for fileset in filesets %}
+                                    <tr>
+                                        <td><a href="/filesets/{{ fileset.id }}">{{ fileset.name }}</a></td>
+                                        <td>{{ fileset.owner }}</td>
+                                        <td>{{ fileset.size }}</td>
+                                        <td>{{ fileset.created }}</td>
+                                        {%  if user == fileset.owner or user.is_staff %}
+                                            <td>[<a href="/filesets/{{ fileset.id }}/delete">delete</a>]</td>
+                                        {% else %}
+                                            <td><i>None permitted</i></td>
+                                        {%  endif %}
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>                           
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
             <div class="card" style="margin-top: 10px;">
-                <div class="card-header">Filesets</div>
+                <div class="card-header">Help</div>
                 <div class="card-body">
-                    <!-- <form id="upload_form" action="/filesets/upload" method="post" enctype="multipart/form-data"> -->
-                    <form id="upload_form" method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <label for="files">Select files:</label>
-                        <!-- <input type="file" id="files" name="files" multiple/><br> -->
-                        <input type="file" id="files" webkitdirectory directory multiple/><br>
-                        <br>
-                        <label for="fileset_name" class="form-label">Fileset name (optional)</label>
-                        <input type="text" class="form-control" id="fileset_name" name="fileset_name" placeholder="Enter name">
-                        <br>
-                        <button type="submit" class="btn btn-primary">Upload</button>
-                    </form>
-
-                    <script>
-                        document.getElementById('upload_form').addEventListener('submit', function(e) {
-                            e.preventDefault();
-                            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-                            const input = document.getElementById('files');
-                            const formData = new FormData();
-                            for(const f of input.files) {
-                                formData.append(f.webkitRelativePath, f);
-                            }
-                            fetch('/filesets/upload', {
-                                method: 'POST',
-                                headers: {'X-CSRFToken': csrfToken},
-                                body: formData
-                            }).then(response => {
-                                if(response.ok) {
-                                    location.reload();
-                                } else {
-                                    alert('Upload failed!');
-                                }
-                            });
-                        });
-                    </script>
-
-                    <table class="table">
-                        <tr>
-                            <th>Name</th>
-                            <th>Owner</th>
-                            <th>Nr. files</th>
-                            <th>Uploaded</th>
-                            <th>Commands</th>
-                        </tr>
-                        {% for fileset in filesets %}
-                            <tr>
-                                <td><a href="/filesets/{{ fileset.id }}">{{ fileset.name }}</a></td>
-                                <td>{{ fileset.owner }}</td>
-                                <td>{{ fileset.size }}</td>
-                                <td>{{ fileset.created }}</td>
-                                {%  if user == fileset.owner or user.is_staff %}
-                                    <td>[<a href="/filesets/{{ fileset.id }}/delete">delete</a>]</td>
-                                {% else %}
-                                    <td><i>None permitted</i></td>
-                                {%  endif %}
-                            </tr>
-                        {% endfor %}
-                    </table>
+                    Some help information
                 </div>
             </div>
         </div>
