@@ -32,6 +32,7 @@ requires = [
     "pendulum",
     "numpy",
     "pandas",
+    "openpyxl",
     "scipy",
     "pillow",
     "pydicom",

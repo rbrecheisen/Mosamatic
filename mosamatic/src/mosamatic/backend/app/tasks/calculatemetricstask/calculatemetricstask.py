@@ -108,4 +108,4 @@ class CalculateMetricsTask(Task):
         xls_file_path = os.path.join(self.output('metrics'), 'bc_metrics.xlsx')
         df = pd.DataFrame(data=data)
         df.to_csv(csv_file_path, index=False, sep=';')
-        df.to_excel(pd.ExcelWriter(xls_file_path), index=False)
+        df.to_excel(xls_file_path, index=False, engine='openpyxl')
