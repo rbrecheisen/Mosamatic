@@ -53,8 +53,8 @@ services:
     volumes:
       - mosamatic_data:/data
       # Specify these host directories if you want to use pipelines in Docker
-      - D:\\Mosamatic\\DjangoTemplate\\ExamplePipeline\\input:/pipeline_data/input
-      - D:\\Mosamatic\\TensorFlowModelFiles:/pipeline_data/TensorFlowModelFiles
+      # - D:\\Mosamatic\\DjangoTemplate\\ExamplePipeline\\input:/pipeline_data/input
+      # - D:\\Mosamatic\\TensorFlowModelFiles:/pipeline_data/TensorFlowModelFiles
     depends_on:
       db:
         condition: service_healthy

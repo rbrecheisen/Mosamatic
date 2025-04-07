@@ -37,7 +37,7 @@ requires = [
     "pydicom",
     "python-gdcm",
     "pynetdicom",
-#    "tensorflow==2.15.0",
+    "tensorflow==2.15.0",
     "torch",
     "torchvision",
     "torchsummary",
