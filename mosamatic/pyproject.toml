@@ -2,7 +2,7 @@
 project_name = "Mosamatic"
 bundle = "com.rbeesoft"
 icon = "src/mosamatic/resources/letter-m"
-version = "1.0"
+version = "1.1"
 url = "https://mosamatic.rbeesoft.nl/wordpress/"
 author = "Ralph Brecheisen"
 author_email = "ralph.brecheisen@gmail.com"
@@ -52,8 +52,7 @@ test_requires = [
 
 [tool.briefcase.app.mosamatic.macOS]
 universal_build = false
-requires = [
-]
+requires = []
 
 [tool.briefcase.app.mosamatic.linux]
 requires = []
@@ -80,8 +79,7 @@ flatpak_runtime_version = "24.08"
 flatpak_sdk = "org.freedesktop.Sdk"
 
 [tool.briefcase.app.mosamatic.windows]
-requires = [
-]
+requires = []
 
 [tool.briefcase.app.mosamatic.iOS]
 supported = false
