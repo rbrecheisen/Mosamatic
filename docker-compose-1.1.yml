@@ -33,6 +33,8 @@ services:
       - ADMIN_USER=admin
       - ADMIN_PASSWORD=admin
       - SECRET_KEY=f9sd7f97sdf89as7fd98as7d9f7sad9f
+    ports:
+      - 8000:8001
     volumes:
       - mosamatic_data:/data
     depends_on:

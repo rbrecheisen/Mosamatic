@@ -19,18 +19,6 @@ services:
     volumes:
       - mosamatic_postgres_data:/var/lib/postgresql/data
 
-  # nginx:
-  #   build: ./nginx
-  #   image: brecheisen/mosamatic-nginx-intel:${VERSION}
-  #   platform: linux/amd64
-  #   container_name: mosamatic_nginx
-  #   ports:
-  #     - 8000:8000
-  #   volumes:
-  #     - mosamatic_data:/data
-  #   depends_on:
-  #     - web
-
   web:
     build: .
     image: brecheisen/mosamatic-web-intel:${VERSION}
@@ -49,7 +37,7 @@ services:
       - ADMIN_PASSWORD=admin
       - SECRET_KEY=f9sd7f97sdf89as7fd98as7d9f7sad9f
     ports:
-      - 8001:8001
+      - 8000:8001
     volumes:
       - mosamatic_data:/data
       # Specify these host directories if you want to use pipelines in Docker

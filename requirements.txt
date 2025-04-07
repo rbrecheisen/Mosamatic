@@ -31,3 +31,8 @@ totalsegmentator
 # Required for Docker
 psycopg2-binary
 gunicorn
+
+# To fix warnings requests
+requests==2.28.2
+urllib3==1.26.14
+charset_normalizer==2.1.1
