@@ -42,9 +42,12 @@
                     <div class="card" style="margin-top: 10px;">
                         <div class="card-header">Task instances</div>
                         <div class="card-body">
-                            <label class="form-check-label" for="auto-refresh">Auto refresh</label><br>
                             <input type="checkbox" class="form-check-input" id="auto-refresh" onclick="autoRefresh();" {% if auto_refresh %} checked {% endif %}>
+                            <label class="form-check-label" for="auto-refresh">Auto refresh</label><br>
                             <br>
+                            {% if active_tasks|length > 0 %}
+                                <a href="/tasks/remove">Remove all task instances</a><br><br>
+                            {% endif %}
                             <table class="table">
                                 <tr>
                                     <th>Task name</th>

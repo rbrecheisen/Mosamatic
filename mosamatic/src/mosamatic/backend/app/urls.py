@@ -3,7 +3,7 @@ from django.urls import path
 from .views.miscellaneous import auth, custom_logout, logs
 from .views.filesets import filesets, fileset, upload_fileset, rename_fileset, delete_fileset, download_fileset, delete_all_filesets
 from .views.files import file, pngfile, textfile, csvfile
-from .views.tasks import tasks, task, run_task, cancel_task, remove_task, pipeline, run_pipeline
+from .views.tasks import tasks, task, run_task, cancel_task, remove_task, remove_all_tasks, pipeline, run_pipeline
 
 
 urlpatterns = [
@@ -31,6 +31,7 @@ urlpatterns = [
 
     # Tasks
     path('tasks/', tasks),
+    path('tasks/remove', remove_all_tasks),
     path('tasks/<str:task_name>', task),
     path('tasks/<str:task_name>/run', run_task),
     path('tasks/<str:task_id>/cancel', cancel_task),

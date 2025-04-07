@@ -101,6 +101,15 @@ def remove_task(request, task_id):
 
 
 @login_required
+def remove_all_tasks(request):
+    if request.method == 'GET':
+        task_manager = TaskManager()
+        task_manager.remove_all_tasks()
+        return redirect('/tasks/')
+    return HttpResponseForbidden(f'Wrong method ({request.method})')
+
+
+@login_required
 def pipeline(request, pipeline_name):
     if request.method == 'GET':
         return render(request, 'pipeline.html', context={

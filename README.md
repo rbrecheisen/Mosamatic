@@ -9,12 +9,10 @@ Web tool for body composition analysis from Maastricht University Medical Center
 
 
 # To-do
-- Directory upload
-- Remove TensorFlow task + package requirements.txt
-- Update user manual WordPress
 - Automatic slice selection
 
 [x] PyTorch model
+[x] Directory upload
 
 
 # Uploading data
