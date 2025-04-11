@@ -71,7 +71,7 @@ TASK_REGISTRY = {
         'params': [
             {'name': 'model_version', 'label': 'Select model version', 'type': 'select', 'options': [2.0]},
         ],
-        'visible': True,
+        'visible': False,
     },
     
     'CalculateMetricsTask': {
@@ -120,6 +120,6 @@ TASK_REGISTRY = {
         'params': [
             {'name': 'structures', 'label': 'Organs/structures', 'type': 'select', 'options': ['all', 'vertebrae_L3']},
         ],
-        'visible': True,
+        'visible': False,
     },
 }
