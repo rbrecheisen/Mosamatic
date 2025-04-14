@@ -4,7 +4,7 @@ import numpy as np
 from ..task import Task
 from .tensorflowmodel import TensorFlowModel
 # from .torchmodel import TorchModel
-from ...utils import load_dicom, normalize_between, get_pixels_from_dicom_object, convert_labels_to_157
+from ...utils import load_dicom, is_jpeg2000_compressed, normalize_between, get_pixels_from_dicom_object, convert_labels_to_157
 
 
 class MuscleFatSegmentationL3Task(Task):
@@ -37,6 +37,8 @@ class MuscleFatSegmentationL3Task(Task):
         if p is None:
             self.log_warning(f'File {f_path} is not valid DICOM, skipping...')
             return
+        if is_jpeg2000_compressed(p):
+            p.decompress()
         img1 = get_pixels_from_dicom_object(p, normalize=True)        
         if contour_model:
             mask = self.predict_contour(contour_model, img1, params, model_type)

@@ -5,7 +5,7 @@ import numpy as np
 import models
 
 from ..task import Task
-from ...utils import load_dicom, normalize_between, get_pixels_from_dicom_object, convert_labels_to_157
+from ...utils import load_dicom, is_jpeg2000_compressed, normalize_between, get_pixels_from_dicom_object, convert_labels_to_157
 from .paramloader import Params
 
 DEVICE = 'cpu'
@@ -68,6 +68,8 @@ class MuscleFatSegmentationL3T4Task(Task):
         if p is None:
             self.log_warning(f'File {f_path} is not valid DICOM, skipping...')
             return
+        if is_jpeg2000_compressed(p):
+            p.decompress()
         image = get_pixels_from_dicom_object(p, normalize=True)
         image = normalize_between(image, params.dict['lower_bound'], params.dict['upper_bound'])
         image = self.extract_contour(image, contour_model)
