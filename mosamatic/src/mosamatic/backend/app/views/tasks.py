@@ -69,7 +69,7 @@ def run_task(request, task_name):
                     params[param['name']] = float(param_value)
                 if param_type == 'bool':
                     params[param['name']] = True if param_value == '1' else False
-                if param_type == 'text':
+                if param_type == 'text' or param_type == 'select' or param_type == 'multi-fileset-select':
                     params[param['name']] = param_value
         # Get output fileset names from request
         output_fileset_names = {}

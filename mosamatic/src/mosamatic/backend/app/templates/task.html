@@ -17,45 +17,87 @@
                 <div class="card-body">
                     <form action="/tasks/{{ task_name }}/run" method="post" enctype="multipart/form-data" id="my-form">
                         {% csrf_token %}
-                        <p><b>Input filesets</b></p>
-                        {% for input in inputs %}
-                            <select class="form-select" id="{{ input.name }}" name="{{ input.name }}">
-                                <option selected>{{ input.label }}</option>
-                                {% for fileset in filesets %}
-                                    <option value="{{ fileset.id }}">{{ fileset.name }}</option>
-                                {% endfor %}
-                            </select>
-                            <br>
-                        {% endfor %}
-                        <br>
-                        <p><b>Parameters</b></p>
-                        {% for param in params %}
-                            <label for="{{ param.name }}" class="form-label">{{ param.label }}</label>
-                            {% if param.type == "int" or param.type == "float" %}
-                                <input type="number" class="form-control" id="{{ param.name }}" name="{{ param.name }}" placeholder="Enter number" min="{{ param.min }}" max="{{ param.max }}" step="{{ param.step }}" value="{{ param.value }}">
-                            {% endif %}
-                            {% if param.type == "text" %}
-                                <input type="text" class="form-control" id="{{ param.name }}" name="{{ param.name }}" placeholder="Enter text" value="{{ param.value }}">
-                            {% endif %}
-                            {% if param.type == "bool" %}
-                                <input class="form-check-input" type="checkbox" value="1" id="{{ param.name }}" name="{{ param.name }}">
-                            {% endif %}
-                            {% if param.type == "select" %}
-                                <select class="form-select" id="{{ param.name }}" name="{{ param.name }}">
-                                    <option selected>{{ param.label }}</option>
-                                    {% for option in param.options %}
-                                        <option value="{{ option }}">{{ option }}</option>
+                        {% if inputs|length > 0 %}
+                            <p><b>Input filesets</b></p>
+                            {% for input in inputs %}
+                                <select class="form-select" id="{{ input.name }}" name="{{ input.name }}">
+                                    <option selected>{{ input.label }}</option>
+                                    {% for fileset in filesets %}
+                                        <option value="{{ fileset.id }}">{{ fileset.name }}</option>
                                     {% endfor %}
                                 </select>
-                            {% endif %}
+                                <br>
+                            {% endfor %}
                             <br>
-                        {% endfor %}
-                        <br>
-                        <p><b>Output fileset names</b></p>
-                        {% for output in outputs %}
-                            <input type="text" class="form-control" id="{{ output.name }}" name="{{ output.name }}" placeholder="{{ output.label }} (optional)" value="">
+                        {% endif %}
+                        {% if params|length > 0 %}
+                            <p><b>Parameters</b></p>
+                            {% for param in params %}
+                                <label for="{{ param.name }}" class="form-label">{{ param.label }}</label>
+                                {% if param.type == "int" or param.type == "float" %}
+                                    <input type="number" class="form-control" id="{{ param.name }}" name="{{ param.name }}" placeholder="Enter number" min="{{ param.min }}" max="{{ param.max }}" step="{{ param.step }}" value="{{ param.value }}">
+                                {% endif %}
+                                {% if param.type == "text" %}
+                                    <input type="text" class="form-control" id="{{ param.name }}" name="{{ param.name }}" placeholder="Enter text" value="{{ param.value }}">
+                                {% endif %}
+                                {% if param.type == "bool" %}
+                                    <input class="form-check-input" type="checkbox" value="1" id="{{ param.name }}" name="{{ param.name }}">
+                                {% endif %}
+                                {% if param.type == "select" %}
+                                    <select class="form-select" id="{{ param.name }}" name="{{ param.name }}">
+                                        <option selected>{{ param.label }}</option>
+                                        {% for option in param.options %}
+                                            <option value="{{ option }}">{{ option }}</option>
+                                        {% endfor %}
+                                    </select>
+                                {% endif %}
+                                {% if param.type == 'multi-fileset-select' %}                                
+                                    <select class="form-select" id="filesets" name="filesets" multiple>
+                                        {% for fileset in filesets %}
+                                            <option value="{{ fileset.id }}">{{ fileset.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <button type="button" class="btn btn-primary mt-2" onclick="addSelected()">Add fileset</button>
+                                    <br>
+                                    <ul id="selected_fileset_list" class="list-group mt-2" style="min-height: 6em; border: 1px solid #ced4da; border-radius: 0.25rem;"></ul>
+                                    <input type="hidden" id="{{ param.name }}" name="{{ param.name }}"/>
+                                    <script>
+                                        function addSelected() {
+                                          const select = document.getElementById('filesets');
+                                          const list = document.getElementById('selected_fileset_list');
+                                          const input = document.getElementById('{{ param.name }}');
+                                          const selected = Array.from(select.selectedOptions).map(opt => opt.value);
+                                      
+                                          // Add to list (avoid duplicates)
+                                          selected.forEach(item => {
+                                            if (![...list.children].some(li => li.dataset.value === item)) {
+                                              const li = document.createElement('li');
+                                              li.className = "list-group-item";
+                                            //   li.textContent = item;
+                                              li.textContent = select.querySelector(`option[value="${item}"]`).textContent;
+                                              li.dataset.value = item;
+                                              list.appendChild(li);
+                                            }
+                                          });
+                                      
+                                          // Update hidden input
+                                          const values = [...list.children].map(li => li.dataset.value);
+                                          input.value = JSON.stringify(values);
+                                        }
+                                    </script>                                    
+                                {% endif %}
+                                <br>
+                            {% endfor %}
                             <br>
-                        {% endfor %}
+                        {% endif %}
+                        {% if outputs|length > 0 %}
+                            <p><b>Output fileset names</b></p>
+                            {% for output in outputs %}
+                                <input type="text" class="form-control" id="{{ output.name }}" name="{{ output.name }}" placeholder="{{ output.label }} (optional)" value="">
+                                <br>
+                            {% endfor %}
+                            <br>
+                        {% endif %}
                         <button type="submit" class="btn btn-primary">Run task</button>
                     </form>
                 </div>

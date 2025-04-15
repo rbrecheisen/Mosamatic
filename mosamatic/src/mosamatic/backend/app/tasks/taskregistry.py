@@ -111,15 +111,14 @@ TASK_REGISTRY = {
         'class': TotalSegmentatorTask,
         'title': 'TotalSegmentatorTask',
         'description': 'Task that runs Total Segmentator on a set of CT or MRI scans and outputs all, or selected, organ segmentations',
-        'inputs': [
-            {'name': 'scans', 'label': 'Select scans'},
-        ],
+        'inputs': [],
         'outputs': [
             {'name': 'segmentations', 'label': 'Enter name for segmentation output (optional)'},
         ],
         'params': [
+            {'name': 'scans', 'label': 'Scans', 'type': 'multi-fileset-select'},
             {'name': 'structures', 'label': 'Organs/structures', 'type': 'select', 'options': ['all', 'vertebrae_L3']},
         ],
-        'visible': False,
+        'visible': True,
     },
 }

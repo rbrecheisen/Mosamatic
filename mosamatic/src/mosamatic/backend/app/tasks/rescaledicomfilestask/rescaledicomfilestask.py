@@ -14,12 +14,6 @@ LOG = LogManager()
 class RescaleDicomFilesTask(Task):
     def rescale_image(self, p, target_size):
         pixel_array = p.pixel_array
-        LOG.info(f'rescale_image() pixel_array.shape = {pixel_array.shape}')
-        # # Sometimes images have a 3rd channel (RGB possibly). In that case, convert to 2D first
-        # if pixel_array.ndim == 3 and pixel_array.shape[2] == 3 and np.all(pixel_array[:, :, 0] == pixel_array[:, :, 1]) and np.all(pixel_array[:, :, 1] == pixel_array[:, :, 2]):
-        #     LOG.warning(f'Pixel array has additional RGB channel! Trying to convert it to 2D...')
-        #     pixel_array = pixel_array[:, :, 0]
-        #     LOG.info(f'rescale_image() after conversion: pixel_array.shape = {pixel_array.shape}')
         hu_array = pixel_array * p.RescaleSlope + p.RescaleIntercept
         hu_air = -1000
         new_rows = max(p.Rows, p.Columns)
