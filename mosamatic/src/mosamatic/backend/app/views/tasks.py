@@ -65,12 +65,16 @@ def run_task(request, task_name):
                 param_type = param['type']
                 if param_type == 'int':
                     params[param['name']] = int(param_value)
-                if param_type == 'float':
+                elif param_type == 'float':
                     params[param['name']] = float(param_value)
-                if param_type == 'bool':
+                elif param_type == 'bool':
                     params[param['name']] = True if param_value == '1' else False
-                if param_type == 'text' or param_type == 'select' or param_type == 'multi-fileset-select':
+                elif param_type == 'text' or param_type == 'select':
                     params[param['name']] = param_value
+                elif param_type == 'multi-fileset-select':
+                    params[param['name']] = json.loads(param_value)
+                else:
+                    raise RuntimeError(f'Unknown parameter type: {param_type}')
         # Get output fileset names from request
         output_fileset_names = {}
         for output in task_info['outputs']:
