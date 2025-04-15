@@ -1,6 +1,7 @@
 import os
 import shutil
 
+from uuid import UUID
 from os.path import basename
 from zipfile import ZipFile
 from django.utils import timezone
@@ -49,6 +50,8 @@ class DataManager:
 
     @staticmethod
     def fileset(fileset_id):
+        if isinstance(fileset_id, str):
+            fileset_id = UUID(fileset_id)
         return FileSetModel.objects.get(pk=fileset_id)
     
     @staticmethod
