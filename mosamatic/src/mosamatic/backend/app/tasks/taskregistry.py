@@ -5,6 +5,7 @@ from .musclefatsegmentationl3t4task.musclefatsegmentationl3t4task import MuscleF
 from .calculatemetricstask.calculatemetricstask import CalculateMetricsTask
 from .createpngsfromsegmentationstask.createpngsfromsegmentationstask import CreatePngsFromSegmentationsTask
 from .totalsegmentatortask.totalsegmentatortask import TotalSegmentatorTask
+from .createpdffmapsfromdixonscanstask.createpdffmapsfromdixonscanstask import CreatePdffMapsFromDixonScansTask
 
 
 TASK_REGISTRY = {
@@ -116,9 +117,23 @@ TASK_REGISTRY = {
             {'name': 'segmentations', 'label': 'Enter name for segmentation output (optional)'},
         ],
         'params': [
-            {'name': 'scans', 'label': 'Scans', 'type': 'multi-fileset-select'},
+            {'name': 'scans', 'label': 'Input filesets', 'type': 'multi-fileset-select'},
             {'name': 'structures', 'label': 'Organs/structures', 'type': 'select', 'options': ['all', 'vertebrae_L3']},
         ],
-        'visible': False,
+        'visible': True,
+    },
+
+    'CreatePdffMapsFromDixonScansTask': {
+        'class': CreatePdffMapsFromDixonScansTask,
+        'title': 'CreatePdffMapsFromDixonScansTask',
+        'description': 'Task that creates Proton Density Fat Fraction (PDFF) maps from multiple Dixon MRI scans',
+        'inputs': [],
+        'outputs': [
+            {'name': 'pdff_maps', 'label': 'Enter name for PDFF map output (optional)'},
+        ],
+        'params': [
+            {'name': 'scans', 'label': 'Input filesets', 'type': 'multi-fileset-select'},
+        ],
+        'visible': True,
     },
 }
