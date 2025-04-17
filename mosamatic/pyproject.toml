@@ -38,7 +38,6 @@ requires = [
     "pydicom",
     "dicom2nifti",
     "python-gdcm",
-#    "pynetdicom",
     "tensorflow==2.15.0",
     "torch",
     "torchvision",

@@ -119,6 +119,6 @@ TASK_REGISTRY = {
             {'name': 'scans', 'label': 'Scans', 'type': 'multi-fileset-select'},
             {'name': 'structures', 'label': 'Organs/structures', 'type': 'select', 'options': ['all', 'vertebrae_L3']},
         ],
-        'visible': True,
+        'visible': False,
     },
 }
