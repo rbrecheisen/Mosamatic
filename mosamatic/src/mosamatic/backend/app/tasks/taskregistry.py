@@ -59,23 +59,6 @@ TASK_REGISTRY = {
         'visible': True,
     },
     
-    'MuscleFatSegmentationL3T4Task': {
-        'class': MuscleFatSegmentationL3T4Task,
-        'title': 'MuscleFatSegmentationL3T4Task',
-        'description': 'Task that automatically annotates muscle and fat tissue in CT images at both L3 and T4 level',
-        'inputs': [
-            {'name': 'images', 'label': 'Select images'},
-            {'name': 'model_files', 'label': 'Select model files'},
-        ],
-        'outputs': [
-            {'name': 'segmentations', 'label': 'Enter name for segmentation output (optional)'},
-        ],
-        'params': [
-            {'name': 'model_version', 'label': 'Select model version', 'type': 'select', 'options': [2.0]},
-        ],
-        'visible': False,
-    },
-    
     'CalculateMetricsTask': {
         'class': CalculateMetricsTask,
         'title': 'CalculateMetricsTask',
@@ -124,6 +107,23 @@ TASK_REGISTRY = {
         'visible': False,
     },
 
+    'MuscleFatSegmentationL3T4Task': {
+        'class': MuscleFatSegmentationL3T4Task,
+        'title': 'MuscleFatSegmentationL3T4Task',
+        'description': 'Task that automatically annotates muscle and fat tissue in CT images at both L3 and T4 level',
+        'inputs': [
+            {'name': 'images', 'label': 'Select images'},
+            {'name': 'model_files', 'label': 'Select model files'},
+        ],
+        'outputs': [
+            {'name': 'segmentations', 'label': 'Enter name for segmentation output (optional)'},
+        ],
+        'params': [
+            {'name': 'model_version', 'label': 'Select model version', 'type': 'select', 'options': [2.0]},
+        ],
+        'visible': False,
+    },
+    
     'SelectL3FromScansTask': {
         'class': SelectL3FromScansTask,
         'title': 'SelectL3FromScansTask',
