@@ -2,9 +2,7 @@ import os
 import shutil
 import math
 import tempfile
-import pydicom
 import nibabel as nib
-import datetime
 import numpy as np
 import matplotlib.pyplot as plt
 
