@@ -15,6 +15,4 @@ class TotalSegmentatorTask(Task):
         for fileset_id in scans:
             fileset = data_manager.fileset(fileset_id)
             fileset_path = fileset.path()
-            LOG.info(f'Running TS on {fileset.name()}...')
-            totalsegmentator(fileset_path, 'D:\\Mosamatic\\TotalSegmentatorOutput', fast=True)
             break

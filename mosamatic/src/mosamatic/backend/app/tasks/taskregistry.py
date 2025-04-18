@@ -5,6 +5,7 @@ from .musclefatsegmentationl3t4task.musclefatsegmentationl3t4task import MuscleF
 from .calculatemetricstask.calculatemetricstask import CalculateMetricsTask
 from .createpngsfromsegmentationstask.createpngsfromsegmentationstask import CreatePngsFromSegmentationsTask
 from .totalsegmentatortask.totalsegmentatortask import TotalSegmentatorTask
+from .selectl3fromscanstask.selectl3fromscanstask import SelectL3FromScansTask
 from .createpdffmapsfromdixonscanstask.createpdffmapsfromdixonscanstask import CreatePdffMapsFromDixonScansTask
 
 
@@ -119,6 +120,20 @@ TASK_REGISTRY = {
         'params': [
             {'name': 'scans', 'label': 'Input filesets', 'type': 'multi-fileset-select'},
             {'name': 'structures', 'label': 'Organs/structures', 'type': 'select', 'options': ['all', 'vertebrae_L3']},
+        ],
+        'visible': True,
+    },
+
+    'SelectL3FromScansTask': {
+        'class': SelectL3FromScansTask,
+        'title': 'SelectL3FromScansTask',
+        'description': 'Task that automatically selects the L3 slice from CT scans using Total Segmentator',
+        'inputs': [],
+        'outputs': [
+            {'name': 'l3_images', 'label': 'Enter name for output fileset (optional)'},
+        ],
+        'params': [
+            {'name': 'scans', 'label': 'Input filesets', 'type': 'multi-fileset-select'},
         ],
         'visible': True,
     },

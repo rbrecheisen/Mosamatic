@@ -65,9 +65,9 @@ def is_dicom(f: str) -> bool:
         return False
     
 
-def load_dicom(f):
+def load_dicom(f, stop_before_pixels=False):
     if is_dicom(f):
-        return pydicom.dcmread(f)
+        return pydicom.dcmread(f, stop_before_pixels=stop_before_pixels)
     return None
 
 
