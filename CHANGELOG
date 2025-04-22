@@ -11,3 +11,7 @@
 ## [1.2] - 18-04-2025
 ### Added
 - SelectL3FromScansTask
+
+## [1.2] - 22-04-2025
+### Updated
+- RescaleDicomFilesTask: performs automatic decompression of DICOM files
