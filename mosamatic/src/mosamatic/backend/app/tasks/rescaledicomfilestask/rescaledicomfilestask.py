@@ -5,7 +5,7 @@ import numpy as np
 from scipy.ndimage import zoom
 
 from ..task import Task
-from ...utils import load_dicom
+from ...utils import load_dicom, is_jpeg2000_compressed
 from ...managers.logmanager import LogManager
 
 LOG = LogManager()
@@ -42,6 +42,8 @@ class RescaleDicomFilesTask(Task):
             source = input_files[step]
             source_name = os.path.split(source)[1]
             p = load_dicom(source)
+            if is_jpeg2000_compressed(p):
+                p.decompress()
             if p.Rows != target_size or p.Columns != target_size:
                 LOG.info(f'Rescaling file {source_name} ({p.Rows}, {p.Columns}) to (512, 512)')
                 p = self.rescale_image(p, target_size)
