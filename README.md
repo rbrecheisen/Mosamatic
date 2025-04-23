@@ -7,4 +7,4 @@ Web tool for body composition analysis from Maastricht University Medical Center
 
 [x] Automatic slice selection
 [x] PyTorch model
-[x] Directory uploa
+[x] Directory upload
