@@ -44,7 +44,7 @@ TASK_REGISTRY = {
     'MuscleFatSegmentationL3Task': {
         'class': MuscleFatSegmentationL3Task,
         'title': 'MuscleFatSegmentationL3Task',
-        'description': 'Task that automatically annotates muscle and fat tissue in CT images at L3 level',
+        'description': 'Task that automatically annotates muscle and fat tissue in CT images at L3 level (uses TensorFlow AI model)',
         'inputs': [
             {'name': 'images', 'label': 'Select images'},
             {'name': 'model_files', 'label': 'Select model files'},
@@ -52,10 +52,7 @@ TASK_REGISTRY = {
         'outputs': [
             {'name': 'segmentations', 'label': 'Enter name for segmentation output (optional)'},
         ],
-        'params': [
-            # {'name': 'model_type', 'label': 'Select model type', 'type': 'select', 'options': ['tensorflow', 'torch']},
-            # {'name': 'model_version', 'label': 'Select model version', 'type': 'select', 'options': [1.0]},
-        ],
+        'params': [],
         'visible': True,
     },
     
@@ -92,6 +89,22 @@ TASK_REGISTRY = {
         'visible': True,
     },
 
+    'SelectL3FromScansTask': {
+        'class': SelectL3FromScansTask,
+        'title': 'SelectL3FromScansTask',
+        'description': 'Task that automatically selects the L3 slice from CT scans using Total Segmentator',
+        'inputs': [],
+        'outputs': [
+            {'name': 'l3_images', 'label': 'Enter name for output fileset (optional)'},
+        ],
+        'params': [
+            {'name': 'scans', 'label': 'Input filesets', 'type': 'multi-fileset-select'},
+        ],
+        'visible': True,
+    },
+
+    # EXPERIMENTAL
+
     'TotalSegmentatorTask': {
         'class': TotalSegmentatorTask,
         'title': 'TotalSegmentatorTask',
@@ -110,7 +123,7 @@ TASK_REGISTRY = {
     'MuscleFatSegmentationL3T4Task': {
         'class': MuscleFatSegmentationL3T4Task,
         'title': 'MuscleFatSegmentationL3T4Task',
-        'description': 'Task that automatically annotates muscle and fat tissue in CT images at both L3 and T4 level',
+        'description': 'Task that automatically annotates muscle and fat tissue in CT images at both L3 and T4 level (uses PyTorch AI model)',
         'inputs': [
             {'name': 'images', 'label': 'Select images'},
             {'name': 'model_files', 'label': 'Select model files'},
@@ -124,20 +137,6 @@ TASK_REGISTRY = {
         'visible': False,
     },
     
-    'SelectL3FromScansTask': {
-        'class': SelectL3FromScansTask,
-        'title': 'SelectL3FromScansTask',
-        'description': 'Task that automatically selects the L3 slice from CT scans using Total Segmentator',
-        'inputs': [],
-        'outputs': [
-            {'name': 'l3_images', 'label': 'Enter name for output fileset (optional)'},
-        ],
-        'params': [
-            {'name': 'scans', 'label': 'Input filesets', 'type': 'multi-fileset-select'},
-        ],
-        'visible': True,
-    },
-
     'CreatePdffMapsFromDixonScansTask': {
         'class': CreatePdffMapsFromDixonScansTask,
         'title': 'CreatePdffMapsFromDixonScansTask',

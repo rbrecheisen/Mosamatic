@@ -41,10 +41,14 @@ class MuscleFatSegmentationL3Task(Task):
         if is_jpeg2000_compressed(p):
             p.decompress()
         # Rescale images if needed
+        rescaled, dimensions = False, [512, 512]
         if p.Rows != 512 or p.Columns != 512:
-            self.log_warning(f'File {f_path} needs to be rescaled from [{p.Rows}, {p.Columns}] to [512, 512]')
+            prev_rows, prev_cols = p.Rows, p.Columns
+            self.log_warning(f'File {f_path} will be rescaled from [{p.Rows}, {p.Columns}] to [512, 512]')
             rescale_task = RescaleDicomFilesTask(inputs={}, outputs={}, params={}, notify_finished_callback=False)
             p = rescale_task.rescale_image(p, target_size=512)
+            rescaled, dimensions = True, [prev_rows, prev_cols]
+            p.save_as(f_path)
         img1 = get_pixels_from_dicom_object(p, normalize=True)
         if contour_model:
             mask = self.predict_contour(contour_model, img1, params, model_type)
@@ -63,7 +67,7 @@ class MuscleFatSegmentationL3Task(Task):
         segmentation_file_name = os.path.split(f_path)[1]
         segmentation_file_path = os.path.join(output_dir, f'{segmentation_file_name}.seg.npy')
         np.save(segmentation_file_path, pred_max)
-        return segmentation_file_path
+        return rescaled, dimensions
 
     def execute(self):
         input_files = self.input('images')
@@ -74,9 +78,17 @@ class MuscleFatSegmentationL3Task(Task):
         if model is None or contour_model is None or params is None:
             raise RuntimeError('Model, contour model or parameters could not be loaded')
         nr_steps = len(input_files)
+        # rescaled_files = open(os.path.join(self.output('segmentations'), 'rescaled.txt'), 'w')
+        rescaled_files = []
         for step in range(nr_steps):
             if self.is_canceled():
                 break
             source = input_files[step]
-            self.process_file(source, self.output('segmentations'), model, contour_model, params, model_type)
+            rescaled, dimensions = self.process_file(source, self.output('segmentations'), model, contour_model, params, model_type)
+            if rescaled:
+                rescaled_files.append((source, dimensions))
             self.set_progress(step, nr_steps)
+        # If there are rescaled files, save these to a text file
+        if len(rescaled_files) > 0:
+            with open(os.path.join(self.output('segmentations'), 'rescaled.txt'), 'w') as f:
+                f.write(f'{rescaled_files[0][0]}: {rescaled_files[0][1]} -> [512, 512]')

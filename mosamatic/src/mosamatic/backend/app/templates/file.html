@@ -27,6 +27,10 @@
                 <div class="card-header"><b>{{ file.name }}</b></div>
                 <div class="card-body">
 
+                    <a href="/filesets/{{ fileset_id }}/files/{{ file.id }}">Download file</a>
+                    <br>
+                    <br>
+
                     {% if file_type == "png" %}
                         <img src="/filesets/{{ fileset_id }}/files/{{ file.id }}">
                     {% endif %}

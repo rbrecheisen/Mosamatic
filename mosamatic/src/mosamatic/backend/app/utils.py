@@ -55,6 +55,17 @@ def is_uuid(value):
         return True
     except ValueError:
         return False
+    
+
+def is_numpy_array(value):
+    return isinstance(value, np.array)
+
+
+def load_numpy_array(f):
+    try:
+        return np.load(f)
+    except Exception as e:
+        return None
 
 
 def is_dicom(f: str) -> bool:

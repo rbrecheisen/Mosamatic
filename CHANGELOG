@@ -8,10 +8,12 @@
 - CalculateMetricsTask
 - CreatePngsFromSegmenationsTask
 
-## [1.2] - 18-04-2025
+## [1.2] - 23-04-2025
 ### Added
 - SelectL3FromScansTask
 
-## [1.2] - 22-04-2025
 ### Updated
 - RescaleDicomFilesTask: performs automatic decompression of DICOM files
+- MuscleFatSegmentationL3Task: performs automatic rescaling of DICOM files
+  that are not 512 x 512. Rescaled files are listed in a file rescaled.txt
+  in the segmentation output fileset.
