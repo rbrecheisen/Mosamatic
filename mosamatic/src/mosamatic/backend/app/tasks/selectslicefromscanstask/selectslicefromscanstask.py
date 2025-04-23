@@ -19,19 +19,16 @@ VERTEBRA = 'vertebrae_L3'
 TOTAL_SEGMENTATOR_OUTPUT_DIR = os.path.join(tempfile.gettempdir(), 'total_segmentator_output')
 
 
-class SelectL3FromScansTask(Task):
+class SelectSliceFromScansTask(Task):
     def extract_masks(self, scan_dir):
-        LOG.info(f'SelectL3FromScansTask.extract_masks() output_dir: {TOTAL_SEGMENTATOR_OUTPUT_DIR}')
         os.makedirs(TOTAL_SEGMENTATOR_OUTPUT_DIR, exist_ok=True)
         os.system(f'TotalSegmentator -i {scan_dir} -o {TOTAL_SEGMENTATOR_OUTPUT_DIR} --fast')
 
     def delete_total_segmentator_output(self):
-        LOG.info(f'SelectL3FromScansTask.delete_total_segmentator_output()')
         if os.path.exists(TOTAL_SEGMENTATOR_OUTPUT_DIR):
             shutil.rmtree(TOTAL_SEGMENTATOR_OUTPUT_DIR)
 
     def find_l3(self, scan_dir):
-        LOG.info(f'SelectL3FromScansTask.find_l3()')
         # Find Z-positions DICOM images
         z_positions = {}
         for f in os.listdir(scan_dir):

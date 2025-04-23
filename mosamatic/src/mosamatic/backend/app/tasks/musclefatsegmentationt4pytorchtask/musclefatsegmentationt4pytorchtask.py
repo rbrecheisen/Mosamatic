@@ -11,7 +11,7 @@ from .paramloader import Params
 DEVICE = 'cpu'
 
 
-class MuscleFatSegmentationL3T4Task(Task):
+class MuscleFatSegmentationT4PyTorchTask(Task):
     def load_models_and_params(self, model_files, model_version):
         # First load params.json because it is needed to instantiate the models
         params = None
@@ -82,7 +82,7 @@ class MuscleFatSegmentationL3T4Task(Task):
     def execute(self):
         input_files = self.input('images')
         model_files = self.input('model_files')
-        model_version = self.param('model_version', 2.0)
+        model_version = self.param('model_version', 1.0)
         model, contour_model, params = self.load_models_and_params(model_files, model_version)
         if model is None:
             raise RuntimeError('Model, contour model or parameters could not be loaded')
