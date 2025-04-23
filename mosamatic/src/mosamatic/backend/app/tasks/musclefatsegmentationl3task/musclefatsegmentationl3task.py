@@ -5,6 +5,7 @@ from ..task import Task
 from .tensorflowmodel import TensorFlowModel
 # from .torchmodel import TorchModel
 from ...utils import load_dicom, is_jpeg2000_compressed, normalize_between, get_pixels_from_dicom_object, convert_labels_to_157
+from ...tasks.rescaledicomfilestask.rescaledicomfilestask import RescaleDicomFilesTask
 
 
 class MuscleFatSegmentationL3Task(Task):
@@ -39,7 +40,12 @@ class MuscleFatSegmentationL3Task(Task):
             return
         if is_jpeg2000_compressed(p):
             p.decompress()
-        img1 = get_pixels_from_dicom_object(p, normalize=True)        
+        # Rescale images if needed
+        if p.Rows != 512 or p.Columns != 512:
+            self.log_warning(f'File {f_path} needs to be rescaled from [{p.Rows}, {p.Columns}] to [512, 512]')
+            rescale_task = RescaleDicomFilesTask(inputs={}, outputs={}, params={}, notify_finished_callback=False)
+            p = rescale_task.rescale_image(p, target_size=512)
+        img1 = get_pixels_from_dicom_object(p, normalize=True)
         if contour_model:
             mask = self.predict_contour(contour_model, img1, params, model_type)
             img1 = normalize_between(img1, params['min_bound'], params['max_bound'])
@@ -62,8 +68,8 @@ class MuscleFatSegmentationL3Task(Task):
     def execute(self):
         input_files = self.input('images')
         model_files = self.input('model_files')
-        model_type = self.param('model_type', 'tensorflow')
-        model_version = self.param('model_version', 1.0)
+        model_type = 'tensorflow' # self.param('model_type', 'tensorflow')
+        model_version = 1.0 # self.param('model_version', 1.0)
         model, contour_model, params = self.load_models_and_params(model_files, model_type, model_version)
         if model is None or contour_model is None or params is None:
             raise RuntimeError('Model, contour model or parameters could not be loaded')

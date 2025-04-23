@@ -53,8 +53,8 @@ TASK_REGISTRY = {
             {'name': 'segmentations', 'label': 'Enter name for segmentation output (optional)'},
         ],
         'params': [
-            {'name': 'model_type', 'label': 'Select model type', 'type': 'select', 'options': ['tensorflow', 'torch']},
-            {'name': 'model_version', 'label': 'Select model version', 'type': 'select', 'options': [1.0]},
+            # {'name': 'model_type', 'label': 'Select model type', 'type': 'select', 'options': ['tensorflow', 'torch']},
+            # {'name': 'model_version', 'label': 'Select model version', 'type': 'select', 'options': [1.0]},
         ],
         'visible': True,
     },
