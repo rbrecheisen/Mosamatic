@@ -95,11 +95,11 @@ TASK_REGISTRY = {
         'description': 'Task that automatically selects the a specific slice from CT scans using Total Segmentator',
         'inputs': [],
         'outputs': [
-            {'name': 'l3_images', 'label': 'Enter name for output fileset (optional)'},
+            {'name': 'selected_images', 'label': 'Enter name for output fileset (optional)'},
         ],
         'params': [
             {'name': 'scans', 'label': 'Input filesets', 'type': 'multi-fileset-select'},
-            {'name': 'vertebra', 'label': 'Vertebral level to select', 'type': 'select', 'options': ['L3', 'T4']},
+            {'name': 'vertebral_level', 'label': 'Vertebral level', 'type': 'select', 'options': ['vertebrae_L3', 'vertebrae_T4']},
         ],
         'visible': True,
     },
