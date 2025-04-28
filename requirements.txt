@@ -7,6 +7,7 @@ django-jinja
 django-session-security
 django-guardian
 django-crispy-forms
+djangorestframework
 crispy-bootstrap5
 pendulum
 pytest

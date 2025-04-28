@@ -1,3 +1,22 @@
+import os
+import requests
+
+INPUT_DIR = 'D:\\Mosamatic\\AutomaticSliceSelection\\validation\\L3'
+OUTPUT_DIR = 'D:\\Mosamatic\\AutomaticSliceSelection\\validation\\output'
+os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+
+def test_api():
+    response = requests.post('http://localhost:8000/api/tasks/DecompressDicomFilesTask/run', json={
+        'inputs': {'images': INPUT_DIR},
+        'outputs': {'output': OUTPUT_DIR},
+        'params': {},
+    })
+    assert response.status_code == 201
+    print(response.json())
+
+
+
 # import os
 # import time
 # import pytest

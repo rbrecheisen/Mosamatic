@@ -1,5 +1,6 @@
 {
     "python.analysis.extraPaths": [
-        "./mosamatic/build/mosamatic/windows/app/src/app_packages/setuptools/_vendor"
+        "./mosamatic/build/mosamatic/windows/app/src/app_packages/setuptools/_vendor",
+        "./mosamatic/src/mosamatic/backend"
     ]
 }

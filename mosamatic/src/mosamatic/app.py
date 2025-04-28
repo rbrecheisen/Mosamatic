@@ -1,23 +1,8 @@
 import os
 import sys
-import socket
-import time
-import subprocess
-import webbrowser
+import argparse
 
 from django.core.management import execute_from_command_line
-
-
-# def wait_for_server(host, port, timeout=30):
-#     start = time.time()
-#     while time.time() - start < timeout:
-#         try:
-#             with socket.create_connection((host, port), timeout=1):
-#                 return True
-#         except OSError as e:
-#             print(f'Socket error: {e}')
-#             time.sleep(1)
-#     return False
 
 
 def run_server():
@@ -39,5 +24,20 @@ def run_server():
     execute_from_command_line(['manage.py', 'runserver', '0.0.0.0:8000'])
 
 
+# def run_cli():
+#     appPath = os.path.join(os.path.abspath(__file__))
+#     appPath = os.path.dirname(appPath)
+#     appPath = os.path.join(appPath, 'backend')
+#     sys.path.append(appPath)
+#     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend.settings')
+#     import django
+#     django.setup()
+#     from app.managers.taskmanager import TaskManager
+
+
 def main():
+    # if os.getenv('APP_MODE', None) == 'cli':
+    #     run_cli()
+    # else:
+    #     run_server()
     run_server()

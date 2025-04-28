@@ -4,6 +4,7 @@ from .views.miscellaneous import auth, custom_logout, logs
 from .views.filesets import filesets, fileset, upload_fileset, rename_fileset, delete_fileset, download_fileset, delete_all_filesets
 from .views.files import file, pngfile, textfile, csvfile
 from .views.tasks import tasks, task, run_task, cancel_task, remove_task, remove_all_tasks, pipeline, run_pipeline
+from .views.api import api_run_task
 
 
 urlpatterns = [
@@ -40,4 +41,7 @@ urlpatterns = [
     # Pipelines
     path('pipelines/<str:pipeline_name>', pipeline),
     path('pipelines/<str:pipeline_name>/run', run_pipeline),
+
+    # API
+    path('api/tasks/<str:task_name>/run', api_run_task),
 ]
