@@ -9,4 +9,7 @@ pause
 call scripts\package.bat
 call scripts\deploy2dockerhub.bat
 
+echo ""
+echo "Don't forget to update GitHub Releases!!!"
+
 endlocal
