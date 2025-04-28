@@ -3,7 +3,7 @@
 setlocal
 
 echo "Building MSI installer and deploying Mosamatic (%VERSION%) to DockerHub."
-echo "Is that correct?"
+echo "Is this version correct?"
 pause
 
 call scripts\package.bat
