@@ -28,7 +28,7 @@ class SelectSliceFromScansTask(Task):
         if os.path.exists(TOTAL_SEGMENTATOR_OUTPUT_DIR):
             shutil.rmtree(TOTAL_SEGMENTATOR_OUTPUT_DIR)
 
-    def find_l3(self, scan_dir):
+    def find_l3(self, scan_dir, mask_name):
         # Find Z-positions DICOM images
         z_positions = {}
         for f in os.listdir(scan_dir):
@@ -37,7 +37,7 @@ class SelectSliceFromScansTask(Task):
             if p is not None:
                 z_positions[p.ImagePositionPatient[2]] = f_path
         # Find Z-position L3 image
-        mask_file = os.path.join(TOTAL_SEGMENTATOR_OUTPUT_DIR, f'{VERTEBRA}.nii.gz')
+        mask_file = os.path.join(TOTAL_SEGMENTATOR_OUTPUT_DIR, f'{mask_name}.nii.gz')
         mask_obj = nib.load(mask_file)
         mask = mask_obj.get_fdata()
         affine_transform = mask_obj.affine
@@ -63,6 +63,7 @@ class SelectSliceFromScansTask(Task):
 
     def execute(self):
         scans = self.param('scans')
+        vertebral_level = self.param('vertebral_level')
         data_manager = DataManager()
         nr_steps = len(scans)
         for step in range(nr_steps):
@@ -72,10 +73,10 @@ class SelectSliceFromScansTask(Task):
             fileset = data_manager.fileset(fileset_id)
             scan_dir = fileset.path()
             self.extract_masks(scan_dir)
-            file_path = self.find_l3(scan_dir)
+            file_path = self.find_l3(scan_dir, vertebral_level)
             if file_path is not None:
                 extension = '' if file_path.endswith('.dcm') else '.dcm'
-                target_file_path = os.path.join(self.output('l3_images'), 'L3_' + fileset.name() + extension)
+                target_file_path = os.path.join(self.output('selected_images'), f'{vertebral_level}_' + fileset.name() + extension)
                 shutil.copyfile(file_path, target_file_path)
             self.delete_total_segmentator_output()
             self.set_progress(step, nr_steps)
