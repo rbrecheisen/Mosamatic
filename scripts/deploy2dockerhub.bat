@@ -4,10 +4,6 @@ setlocal
 
 set /p VERSION=<VERSION
 
-echo "Deploying Mosamatic version %VERSION% to DockerHub."
-echo "Is that correct?"
-pause
-
 call scripts\build-docker.bat
 
 docker logout
