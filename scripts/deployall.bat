@@ -2,6 +2,8 @@
 
 setlocal
 
+set /p VERSION=<VERSION
+
 echo "Building MSI installer and deploying Mosamatic (%VERSION%) to DockerHub."
 echo "Is this version correct?"
 pause
