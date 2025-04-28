@@ -17,3 +17,13 @@
 - MuscleFatSegmentationL3Task: performs automatic rescaling of DICOM files
   that are not 512 x 512. Rescaled files are listed in a file rescaled.txt
   in the segmentation output fileset.
+
+## [1.2] - 28-04-2025
+### Updated
+- MuscleFatSegmentationL3Task: no longer performs automatic rescaling of
+  DICOM images because the CalculateMetricsTask requires both the original
+  images as well as the segmentation output. If the this task createse a
+  rescaled copy of the original images, then the dimensions of the original
+  images will no longer match the dimensions of the segmentations. This
+  will cause problems for the CalculateMetricsTask which requires both the
+  original images and segmentations.

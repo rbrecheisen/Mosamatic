@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 
 from ..task import Task
-from ...utils import calculate_area, calculate_index, calculate_mean_radiation_attenuation, get_pixels_from_dicom_object, load_dicom
+from ...utils import calculate_area, calculate_index, calculate_mean_radiation_attenuation, get_pixels_from_dicom_object, load_dicom, is_jpeg2000_compressed
 
 MUSCLE, VAT, SAT = 1, 5, 7
 
@@ -35,6 +35,8 @@ class CalculateMetricsTask(Task):
         p = load_dicom(f)
         if p is None:
             return None, None
+        if is_jpeg2000_compressed(p):
+            p.decompress()
         pixels = get_pixels_from_dicom_object(p, normalize=True)
         return pixels, p.PixelSpacing
 

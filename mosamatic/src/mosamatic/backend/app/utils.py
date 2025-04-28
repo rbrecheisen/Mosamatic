@@ -86,12 +86,30 @@ def is_jpeg2000_compressed(p: pydicom.FileDataset):
     return p.file_meta.TransferSyntaxUID not in [ExplicitVRLittleEndian, ImplicitVRLittleEndian, ExplicitVRBigEndian]
 
 
+def get_rescale_params(p):
+    rescale_slope = getattr(p, 'RescaleSlope', None)
+    rescale_intercept = getattr(p, 'RescaleIntercept', None)
+    if rescale_slope is not None and rescale_intercept is not None:
+        return rescale_slope, rescale_intercept
+    # Try Enhanced DICOM structure
+    if 'SharedFunctionalGroupsSequence' in p:
+        fg = p.SharedFunctionalGroupsSequence[0]
+        if 'PixelValueTransformationSequence' in fg:
+            pvt = fg.PixelValueTransformationSequence[0]
+            rescale_slope = pvt.get('RescaleSlope', 1)
+            rescale_intercept = pvt.get('RescaleIntercept', 0)
+            return rescale_slope, rescale_intercept
+    return 1, 0
+
+
 def get_pixels_from_dicom_object(p: pydicom.FileDataset, normalize: bool=True) -> np.array:
     pixels = p.pixel_array
     if not normalize:
         return pixels
     if normalize is True: # Map pixel values back to original HU values
-        return p.RescaleSlope * pixels + p.RescaleIntercept
+        rescale_slope, rescale_intercept = get_rescale_params(p)
+        print(f'get_pixels_from_dicom_object() rescale_slope: {rescale_slope}, rescale_intercept: {rescale_intercept}')
+        return rescale_slope * pixels + rescale_intercept
     if isinstance(normalize, int):
         return (pixels + np.min(pixels)) / (np.max(pixels) - np.min(pixels)) * normalize
     if isinstance(normalize, list):
