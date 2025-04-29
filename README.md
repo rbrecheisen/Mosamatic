@@ -3,6 +3,8 @@ Web tool for body composition analysis from Maastricht University Medical Center
 
 
 # To-do
+- Create host-mounted Docker volume for API processing
+
 - Integrate PyTorch T4 model
 - Implement Bokeh visualization of body composition output
 - Implement Dixon MRI fat quantification
