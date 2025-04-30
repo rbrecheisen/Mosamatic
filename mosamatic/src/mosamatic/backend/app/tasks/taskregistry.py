@@ -6,6 +6,7 @@ from .calculatemetricstask.calculatemetricstask import CalculateMetricsTask
 from .createpngsfromsegmentationstask.createpngsfromsegmentationstask import CreatePngsFromSegmentationsTask
 from .totalsegmentatortask.totalsegmentatortask import TotalSegmentatorTask
 from .selectslicefromscanstask.selectslicefromscanstask import SelectSliceFromScansTask
+from .validatesliceselectiontask.validatesliceselectiontask import ValidateSliceSelectionTask
 from .createpdffmapsfromdixonscanstask.createpdffmapsfromdixonscanstask import CreatePdffMapsFromDixonScansTask
 
 
@@ -99,8 +100,23 @@ TASK_REGISTRY = {
         ],
         'params': [
             {'name': 'scans', 'label': 'Input filesets', 'type': 'multi-fileset-select'},
-            {'name': 'vertebral_level', 'label': 'Vertebral level', 'type': 'select', 'options': ['vertebrae_L3', 'vertebrae_T4']},
+            {'name': 'vertebral_level', 'label': 'Vertebral level', 'type': 'select', 'options': ['vertebrae_L3']},
         ],
+        'visible': True,
+    },
+
+    'ValidateSliceSelectionTask': {
+        'class': ValidateSliceSelectionTask,
+        'title': 'ValidateSliceSelectionTask',
+        'description': 'Task that validates automatic slice selection (from SelectSliceFromScansTask) with manual selections',
+        'inputs': [
+            {'name': 'auto_selected', 'label': 'Automatically selected images'},
+            {'name': 'manually_selected', 'label': 'Ground truth manually selected images'},
+        ],
+        'outputs': [
+            {'name': 'comparison', 'label': 'Enter name for output fileset containing comparison (optional)'},
+        ],
+        'params': [],
         'visible': True,
     },
 
