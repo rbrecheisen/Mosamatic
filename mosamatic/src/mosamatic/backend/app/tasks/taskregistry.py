@@ -1,13 +1,13 @@
 from .decompressdicomfilestask.decompressdicomfilestask import DecompressDicomFilesTask
 from .rescaledicomfilestask.rescaledicomfilestask import RescaleDicomFilesTask
 from .musclefatsegmentationl3task.musclefatsegmentationl3task import MuscleFatSegmentationL3Task
-from .musclefatsegmentationt4pytorchtask.musclefatsegmentationt4pytorchtask import MuscleFatSegmentationT4PyTorchTask
+from .musclefatsegmentationt4task.musclefatsegmentationt4task import MuscleFatSegmentationT4Task
 from .calculatemetricstask.calculatemetricstask import CalculateMetricsTask
 from .createpngsfromsegmentationstask.createpngsfromsegmentationstask import CreatePngsFromSegmentationsTask
 from .totalsegmentatortask.totalsegmentatortask import TotalSegmentatorTask
 from .selectslicefromscanstask.selectslicefromscanstask import SelectSliceFromScansTask
 from .validatesliceselectiontask.validatesliceselectiontask import ValidateSliceSelectionTask
-from .createpdffmapsfromdixonscanstask.createpdffmapsfromdixonscanstask import CreatePdffMapsFromDixonScansTask
+from .createpdffmapsfromdixonscanstask.createpdffmapsfromdixonscanstask import CreatePdffMapFromDixonScanTask
 
 
 TASK_REGISTRY = {
@@ -137,9 +137,9 @@ TASK_REGISTRY = {
         'visible': True,
     },
 
-    'MuscleFatSegmentationT4PyTorchTask': {
-        'class': MuscleFatSegmentationT4PyTorchTask,
-        'title': 'MuscleFatSegmentationT4PyTorchTask',
+    'MuscleFatSegmentationT4Task': {
+        'class': MuscleFatSegmentationT4Task,
+        'title': 'MuscleFatSegmentationT4Task',
         'description': 'Task that automatically annotates muscle and fat tissue in CT images at T4 level (uses PyTorch AI model)',
         'inputs': [
             {'name': 'images', 'label': 'Select images'},
@@ -154,19 +154,18 @@ TASK_REGISTRY = {
         'visible': True,
     },
     
-    # EXPERIMENTAL
-
-    'CreatePdffMapsFromDixonScansTask': {
-        'class': CreatePdffMapsFromDixonScansTask,
-        'title': 'CreatePdffMapsFromDixonScansTask',
-        'description': 'Task that creates Proton Density Fat Fraction (PDFF) maps from multiple Dixon MRI scans',
-        'inputs': [],
+    'CreatePdffMapFromDixonScanTask': {
+        'class': CreatePdffMapFromDixonScanTask,
+        'title': 'CreatePdffMapFromDixonScanTask',
+        'description': 'Task that creates a Proton Density Fat Fraction (PDFF) map from a single Dixon MRI scan',
+        'inputs': [
+            {'name': 'dicom_files', 'label': 'Input fileset containing Dixon MR images'},
+        ],
         'outputs': [
-            {'name': 'pdff_maps', 'label': 'Enter name for PDFF map output (optional)'},
+            {'name': 'pdff_map', 'label': 'Enter name for PDFF map output (optional)'},
+            {'name': 'png', 'label': 'Enter name for fileset with middle-slice PNG image (optional)'},
         ],
-        'params': [
-            {'name': 'scans', 'label': 'Input filesets', 'type': 'multi-fileset-select'},
-        ],
-        'visible': False,
+        'params': [],
+        'visible': True,
     },
 }

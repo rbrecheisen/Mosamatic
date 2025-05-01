@@ -33,7 +33,7 @@ class FileUploadManager:
                     f_path = default_storage.save(f'{fileset.id()}/{f.name}', ContentFile(f_obj.read()))
                     f_path = os.path.join(settings.MEDIA_ROOT, f_path)
                     data_manager.create_file(f_path, fileset)
-                    LOG.info(f'Added file {f_path}')
+                    print(f'Added file {f_path}')
         else:
             filesets = defaultdict(list)
             for rel_path, f in request.FILES.items():
@@ -48,4 +48,4 @@ class FileUploadManager:
                         f_path = default_storage.save('{}/{}'.format(fileset.id(), f_name), ContentFile(f.read()))
                         f_path = os.path.join(settings.MEDIA_ROOT, f_path)
                         data_manager.create_file(f_path, fileset)
-                    LOG.info(f'Added file: {file} to fileset {fileset.name()}')
+                    print(f'Added file: {file} to fileset {fileset.name()}')
