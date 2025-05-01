@@ -45,7 +45,7 @@
                                 {% endif %}
                                 {% if param.type == "select" %}
                                     <select class="form-select" id="{{ param.name }}" name="{{ param.name }}">
-                                        <option selected>{{ param.label }}</option>
+                                        <option selected>Select value</option>
                                         {% for option in param.options %}
                                             <option value="{{ option }}">{{ option }}</option>
                                         {% endfor %}

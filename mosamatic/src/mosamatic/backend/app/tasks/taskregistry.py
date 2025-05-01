@@ -90,17 +90,34 @@ TASK_REGISTRY = {
         'visible': True,
     },
 
+    'TotalSegmentatorTask': {
+        'class': TotalSegmentatorTask,
+        'title': 'TotalSegmentatorTask',
+        'description': 'Task that runs Total Segmentator on a single CT scan and extracts various structures',
+        'inputs': [
+            {'name': 'scan', 'label': 'Select scan'},
+        ],
+        'outputs': [
+            {'name': 'segmentations', 'label': 'Enter name for segmentation output (optional)'},
+        ],
+        'params': [
+            {'name': 'task', 'label': 'Task to run', 'type': 'select', 'options': ['all', 'liver_vessels', 'liver_segments']},
+            {'name': 'fast', 'label': 'Use fast option', 'type': 'bool', 'default': True},
+        ],
+        'visible': True,
+    },
+
     'SelectSliceFromScansTask': {
         'class': SelectSliceFromScansTask,
         'title': 'SelectSliceFromScansTask',
-        'description': 'Task that automatically selects the a specific slice from CT scans using Total Segmentator',
+        'description': 'Task that automatically selects a vertebral slice from a set of CT scans using Total Segmentator',
         'inputs': [],
         'outputs': [
             {'name': 'selected_images', 'label': 'Enter name for output fileset (optional)'},
         ],
         'params': [
             {'name': 'scans', 'label': 'Input filesets', 'type': 'multi-fileset-select'},
-            {'name': 'vertebral_level', 'label': 'Vertebral level', 'type': 'select', 'options': ['vertebrae_L3']},
+            {'name': 'vertebral_level', 'label': 'Vertebral level', 'type': 'select', 'options': ['vertebrae_L3', 'vertebrae_T4']},
         ],
         'visible': True,
     },
@@ -138,21 +155,6 @@ TASK_REGISTRY = {
     },
     
     # EXPERIMENTAL
-
-    'TotalSegmentatorTask': {
-        'class': TotalSegmentatorTask,
-        'title': 'TotalSegmentatorTask',
-        'description': 'Task that runs Total Segmentator on a set of CT or MRI scans and outputs all, or selected, organ segmentations',
-        'inputs': [],
-        'outputs': [
-            {'name': 'segmentations', 'label': 'Enter name for segmentation output (optional)'},
-        ],
-        'params': [
-            {'name': 'scans', 'label': 'Input filesets', 'type': 'multi-fileset-select'},
-            {'name': 'structures', 'label': 'Organs/structures', 'type': 'select', 'options': ['all', 'vertebrae_L3']},
-        ],
-        'visible': False,
-    },
 
     'CreatePdffMapsFromDixonScansTask': {
         'class': CreatePdffMapsFromDixonScansTask,
