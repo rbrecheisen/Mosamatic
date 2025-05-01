@@ -17,7 +17,7 @@ TOTAL_SEGMENTATOR_OUTPUT_DIR = os.path.join(tempfile.gettempdir(), 'total_segmen
 
 Z_DELTA_OFFSETS = {
     'vertebrae_L3': 0.333,
-    'vertebrae_T4': 0.333,
+    'vertebrae_T4': 0.5,
 }
 
 
