@@ -1,7 +1,7 @@
 import os
 import pydicom
 import numpy as np
-import matplotlib.pyplot as plt
+import nibabel as nib
 
 from PIL import Image
 
@@ -49,6 +49,10 @@ class CreatePdffMapFromDixonScanTask(Task):
         # Save PDFF map to output fileset
         pdff_map_file_path = os.path.join(self.output('pdff_map'), 'pdff_map.npy')
         np.save(pdff_map_file_path, pdff_map)
+        # Save PDFF map as NIFTI file as well
+        pdff_map_nifti = nib.Nifti1Image(pdff_map, np.eye(4))
+        pdff_map_nifti_file_path = os.path.join(self.output('pdff_map'), 'pdff_map.nii.gz')
+        nib.save(pdff_map_nifti, pdff_map_nifti_file_path)
         # Create PNG image of middle slice and save to PNG output fileset
         mid_slice_idx = pdff_map.shape[0] // 2
         mid_slice = pdff_map[mid_slice_idx, :, :]

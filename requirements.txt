@@ -15,6 +15,7 @@ pytest-django
 
 # Processing
 numpy
+nibabel
 pandas
 openpyxl
 scipy
