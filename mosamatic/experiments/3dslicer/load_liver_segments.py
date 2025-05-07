@@ -3,7 +3,10 @@ import slicer
 #################################################################################################################
 # Load this script in 3D Slicer as follows:
 # - Open Python console: View > Python Console
-# - Copy paste following line: exec(open("D:\\Mosamatic\\TotalSegmentatorOutput\\load_liver_segments.py").read())
+# - Copy paste following line and run it: 
+#
+#   exec(open("D:\\Mosamatic\\TotalSegmentatorOutput\\load_liver_segments.py").read())
+#
 #################################################################################################################
 
 # Define segment names and their corresponding file paths
