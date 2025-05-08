@@ -40,6 +40,8 @@ services:
       - 8000:8001
     volumes:
       - mosamatic_data:/data
+      - ./pipelines:/pipelines # Can be used to process data via the REST interface
+      
       # Specify these host directories if you want to use pipelines in Docker
       # - D:\\Mosamatic\\DjangoTemplate\\ExamplePipeline\\input:/pipeline_data/input
       # - D:\\Mosamatic\\TensorFlowModelFiles:/pipeline_data/TensorFlowModelFiles

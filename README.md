@@ -13,7 +13,7 @@ segments.
 
 
 # To-do
-- Create host-mounted Docker volume for API processing
+- Update documentation to explain REST API and /pipelines directory
 
 ## Someday/maybe
 - Integrate PyTorch T4 model

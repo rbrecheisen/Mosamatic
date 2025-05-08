@@ -37,6 +37,7 @@ services:
       - 8000:8001
     volumes:
       - mosamatic_data:/data
+      - ./pipelines:/pipelines # Can be used to process data via the REST interface
     depends_on:
       db:
         condition: service_healthy
