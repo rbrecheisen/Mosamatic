@@ -8,9 +8,24 @@ from .totalsegmentatortask.totalsegmentatortask import TotalSegmentatorTask
 from .selectslicefromscanstask.selectslicefromscanstask import SelectSliceFromScansTask
 from .validatesliceselectiontask.validatesliceselectiontask import ValidateSliceSelectionTask
 from .createpdffmapsfromdixonscanstask.createpdffmapsfromdixonscanstask import CreatePdffMapFromDixonScanTask
+from .checkdicomfilestask.checkdicomfilestask import CheckDicomFilesTask
 
 
 TASK_REGISTRY = {
+
+    'CheckDicomFilesTask': {
+        'class': CheckDicomFilesTask,
+        'title': 'CheckDicomFilesTask',
+        'description': 'Task that checks DICOM images for muscle/fat segmentation, specifically NumPy array shape',
+        'inputs': [
+            {'name': 'images', 'label': 'Select images'},
+        ],
+        'outputs': [
+            {'name': 'output', 'label': 'Enter name for output (optional)'},
+        ],
+        'params': [],
+        'visible': True,
+    },
 
     'DecompressDicomFilesTask': {
         'class': DecompressDicomFilesTask,
