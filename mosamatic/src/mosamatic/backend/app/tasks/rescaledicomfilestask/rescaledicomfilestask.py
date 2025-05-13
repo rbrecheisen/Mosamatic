@@ -44,13 +44,17 @@ class RescaleDicomFilesTask(Task):
             p = load_dicom(source)
             if is_jpeg2000_compressed(p):
                 p.decompress()
-            if p.Rows != target_size or p.Columns != target_size:
-                LOG.info(f'Rescaling file {source_name} ({p.Rows}, {p.Columns}) to (512, 512)')
-                p = self.rescale_image(p, target_size)
-                source_name = os.path.splitext(source_name)[0] + '_rescaled.dcm'
-                target = os.path.join(self.output('output'), source_name)
-                p.save_as(target)
+            pixel_array = p.pixel_array
+            if len(pixel_array.shape) == 2:
+                if p.Rows != target_size or p.Columns != target_size:
+                    LOG.info(f'Rescaling file {source_name} ({p.Rows}, {p.Columns}) to (512, 512)')
+                    p = self.rescale_image(p, target_size)
+                    source_name = os.path.splitext(source_name)[0] + '_rescaled.dcm'
+                    target = os.path.join(self.output('output'), source_name)
+                    p.save_as(target)
+                else:
+                    target = os.path.join(self.output('output'), source_name)
+                    shutil.copy(source, target)
             else:
-                target = os.path.join(self.output('output'), source_name)
-                shutil.copy(source, target)
+                LOG.error(f'File {source} is not usable, probably wrong pixel array shape {pixel_array.shape}')
             self.set_progress(step, nr_steps)
