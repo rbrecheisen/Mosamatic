@@ -7,7 +7,7 @@ from .createpngsfromsegmentationstask.createpngsfromsegmentationstask import Cre
 from .totalsegmentatortask.totalsegmentatortask import TotalSegmentatorTask
 from .selectslicefromscanstask.selectslicefromscanstask import SelectSliceFromScansTask
 from .validatesliceselectiontask.validatesliceselectiontask import ValidateSliceSelectionTask
-from .createpdffmapsfromdixonscanstask.createpdffmapsfromdixonscanstask import CreatePdffMapFromDixonScanTask
+from .createpdffmapsfromdixonscanstask.createpdffmapsfromdixonscanstask import CreatePdffMapsFromDixonScansTask
 from .checkdicomfilestask.checkdicomfilestask import CheckDicomFilesTask
 
 
@@ -169,10 +169,10 @@ TASK_REGISTRY = {
         'visible': True,
     },
     
-    'CreatePdffMapFromDixonScanTask': {
-        'class': CreatePdffMapFromDixonScanTask,
-        'title': 'CreatePdffMapFromDixonScanTask',
-        'description': 'Task that creates a Proton Density Fat Fraction (PDFF) map from a single Dixon MRI scan',
+    'CreatePdffMapsFromDixonScansTask': {
+        'class': CreatePdffMapsFromDixonScansTask,
+        'title': 'CreatePdffMapsFromDixonScansTask',
+        'description': 'Task that creates Proton Density Fat Fraction (PDFF) maps from Dixon MRI scans',
         'inputs': [
             {'name': 'dicom_files', 'label': 'Input fileset containing Dixon MR images'},
         ],

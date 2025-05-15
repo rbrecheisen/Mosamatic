@@ -11,7 +11,7 @@ from ..task import Task
 LOG = LogManager()
 
 
-class CreatePdffMapFromDixonScanTask(Task):
+class CreatePdffMapsFromDixonScansTask(Task):
     def get_in_and_out_phase_images(self, files):
         ip = []
         op = []
