@@ -107,7 +107,7 @@
             <div class="card" style="margin-top: 10px;">
                 <div class="card-header">Help</div>
                 <div class="card-body">
-                    Some help information
+                    {% include "help/tasks/"|add:task_name|lower|add:".html" %}
                 </div>
             </div>
         </div>
