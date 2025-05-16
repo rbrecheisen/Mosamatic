@@ -8,4 +8,5 @@ python manage.py create_admin_user
 python manage.py clear_logs
 python manage.py collectstatic --noinput
 
-gunicorn backend.wsgi -w 2 -b 0.0.0.0:8001 -t 81240
+# gunicorn backend.wsgi -w 2 -b 0.0.0.0:8001 -t 81240
+waitress-serve --listen=0.0.0.0:8000 backend.wsgi:application

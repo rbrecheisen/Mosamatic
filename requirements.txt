@@ -12,6 +12,7 @@ crispy-bootstrap5
 pendulum
 pytest
 pytest-django
+waitress
 
 # Processing
 numpy
@@ -33,7 +34,7 @@ totalsegmentator
 
 # Required for Docker
 psycopg2-binary
-gunicorn
+# gunicorn
 
 # To fix warnings requests
 requests==2.28.2

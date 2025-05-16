@@ -44,6 +44,7 @@ requires = [
     "torchsummary",
     "opencv-python",
     "totalsegmentator",
+    "waitress",
 ]
 test_requires = [
     "pytest",
