@@ -8,7 +8,6 @@ from ..task import Task
 LOG = LogManager()
 
 TOTAL_SEGMENTATOR_OUTPUT_DIR = os.path.join(tempfile.gettempdir(), 'total_segmentator_output')
-LOG.info(f'TOTAL_SEGMENTATOR_OUTPUT_DIR: {TOTAL_SEGMENTATOR_OUTPUT_DIR}')
 
 
 class TotalSegmentatorTask(Task):

@@ -44,7 +44,9 @@ services:
 
 volumes:
   mosamatic_data:
+    name: mosamatic_data
   mosamatic_postgres_data:
+    name: mosamatic_postgres_data
 
 networks:
   default:
