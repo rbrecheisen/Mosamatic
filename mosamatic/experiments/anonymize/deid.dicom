@@ -1,0 +1,4 @@
+REMOVE PatientName
+REMOVE PatientID
+REPLACE StudyDescription WITH "Anonymous Study"
+REPLACE SeriesDescription WITH "Anonymized Series"
