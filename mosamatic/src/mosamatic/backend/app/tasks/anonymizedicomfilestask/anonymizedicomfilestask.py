@@ -13,10 +13,13 @@ LOG = LogManager()
 class AnonymizeDicomFilesTask(Task):
     """
     TODO: Anonymize multiple scans
+    TODO: Build UI for specifying anonymization settings in detail
+        - Remove patient name, patient ID, referring physician's name, etc.
+        - ID generation method
     """
     def execute(self):
-        input_files = self.input('images')
-        recipe_file = self.params('recipe_file')
+        input_files = self.input('dicom_files')
+        recipe_file = self.params('recipe')
         nr_steps = len(input_files)
         for step in range(nr_steps):
             if self.is_canceled():

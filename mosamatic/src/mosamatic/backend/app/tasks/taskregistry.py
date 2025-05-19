@@ -9,6 +9,7 @@ from .selectslicefromscanstask.selectslicefromscanstask import SelectSliceFromSc
 from .validatesliceselectiontask.validatesliceselectiontask import ValidateSliceSelectionTask
 from .createpdffmapsfromdixonscanstask.createpdffmapsfromdixonscanstask import CreatePdffMapsFromDixonScansTask
 from .checkdicomfilestask.checkdicomfilestask import CheckDicomFilesTask
+from .anonymizedicomfilestask.anonymizedicomfilestask import AnonymizeDicomFilesTask
 
 
 TASK_REGISTRY = {
@@ -179,6 +180,21 @@ TASK_REGISTRY = {
         'outputs': [
             {'name': 'pdff_map', 'label': 'Enter name for PDFF map output (optional)'},
             {'name': 'png', 'label': 'Enter name for fileset with middle-slice PNG image (optional)'},
+        ],
+        'params': [],
+        'visible': True,
+    },
+
+    'AnonymizeDicomFilesTask': {
+        'class': AnonymizeDicomFilesTask,
+        'title': 'AnonymizeDicomFilesTask',
+        'description': 'Task that anonymizes DICOM files',
+        'inputs': [
+            {'name': 'dicom_files', 'label': 'Input fileset containing DICOM images'},
+            {'name': 'recipe', 'label': 'Input fileset containing anonymization recipe (deid format)'},
+        ],
+        'outputs': [
+            {'name': 'anonymized', 'label': 'Enter name for anonymized fileset (optional)'},
         ],
         'params': [],
         'visible': True,
