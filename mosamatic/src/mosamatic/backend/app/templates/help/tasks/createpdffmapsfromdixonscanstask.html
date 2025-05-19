@@ -1,1 +1,15 @@
-This is some help information
+This task can be used to create a so-called Proton Density Fat Fraction (PDFF) map from a single 
+Dixom MRI scan. The name seems to imply that the task can do this for multiple Dixon MRI scans but
+this has not been implemented yet.<br>
+<br>
+The input fileset for this task should be a list of DICOM images that together comprise the DIXON scan.
+Each Dixon scan consists of multiple DICOM series. Normally, each series would represent a separate scan and
+this is also true for Dixon but these scans belong together and contain different data. For example, Dixon
+images commonly consist of a (1) an in-phase (IP) image, (2) an opposite-phase (OP) image and (3) a water image. The latter
+contains pixels that represent water content in the image. The PDFF map that this task calculates contains pixels
+or voxels that represent the fat content in the image, or specifically the percentage of fat in each pixel. This
+data is not available by default but can be calculated from the IP and OP images.<br>
+<br>
+The output filesets for this task are (1) the PDFF map and (2) a single PNG image showing visually the fat 
+distribution in the middle slice of the PDFF map. You can view this PNG image when you go to the Filesets page,
+select the corresponding fileset and view its single file. 

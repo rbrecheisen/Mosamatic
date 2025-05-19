@@ -1,1 +1,13 @@
-This is some help information
+This task can be used to verify that the slices selected using the <b>SelectSliceFromScansTask</b> task
+are the correct ones. For this you need two input filesets: (1) the fileset containing the automatically 
+selected images (either L3 or T4 images) and (2) a fileset containing the manually selected L3 or T4 images.
+These latter images will serve as the ground truth to which the automatically selected slice will be compared.<br>
+<br>
+When you run this task it will lookup the Z-coordinates of both the automatically and manually selected images
+and compare them pairwise. The output result will be a table where each row contain the original DICOM file name,
+the Z-coordinate of the automatically selected image, the Z-coordinate of the manually selected image and the 
+difference between the two, in millimeters.<br>
+<br>
+For a CT scan with a slice thickess of 3mm the difference in Z-coordinates should be between 0 and 3 millimeters.
+This means that the automatic method can be spot on or pick one slice higher or lower than the true slice. Larger
+deviations may point to a problem in processing the scans.

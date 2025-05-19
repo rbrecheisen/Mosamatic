@@ -1,1 +1,22 @@
-This is some help information
+This task can be used to rescale (if necessary) DICOM images that are not 512 by 512 pixels. Mosamatic
+requires images to be 512 x 512 pixels for body composition analysis. If they are not, and this happens
+sometimes, they need to be rescaled.<br>
+<br>
+For example, sometimes CT images are wider than usual to capture the full abdominal anatomy of the patient
+especially if the patient is obese (which occurs more and more often). In that case, the images could be
+512 x 768 pixels or even 1024 x 1024 pixels.<br>
+<br>
+If the image's width is greater that its height, it first must be converted to a square image by adding
+zero's (black pixels) to it. For example, an image of 512 x 700 pixels will get a band of black pixels
+288 x 700 pixels added to it. This will result in a new image 700 x 700 pixels. The addition of the 
+black band of pixels will cause the patient's anatomy to move to the upper half of the image somewhat. After
+this enlargement, the image can now be downscaled to 512 x 512. This will, overall, decrease the size of 
+the visible anatomy somewhat but we do not expect large deviations in the calculated body composition metrics
+(surface area and mean gray value) as calculated by the <b>CalculateMetricsTask</b> task.<br>
+<br>
+Rescaled images will be stored in the output fileset under the same name but with <b>_rescaled.dcm</b> at the
+end so they are easily recognized. Images that were already 512 x 512 will be unchanged and copied to the
+output fileset as-is.<br>
+<br>
+When you run the <b>MuscleFatSegmentationL3Task</b> or <b>MuscleFatSegmentationT4Task</b> tasks on the DICOM
+images make sure you select the fileset with the <i>rescaled</i> image and not the original one!

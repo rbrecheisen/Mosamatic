@@ -1,1 +1,13 @@
-This is some help information
+This task can be used to calculate body composition metrics for a set of L3 and T4 images. It takes two
+input filesets: (1) the fileset with L3 (or T4) images and (2) the fileset containing the muscle and fat
+segmentations extracted by the <b>MuscleFatSegmentationL3Task</b> or <b>MuscleFatSegmentationT4Task</b>.<br>
+<br>
+The task works by overlaying each segmentation image on top of the corresponding L3 or T4 image, thereby 
+knowing which image pixels correspond to which segmentation region. It can then calculate the surface area
+of each segmentation region as well as the mean gray value (in Hounsfield units) of the pixels in each 
+segmentation region.<br>
+<br>
+You can optionally also provide a fileset that contains a single comma-separated value (CVS) file that contains,
+for each L3 or T4 file, the patient's height in meters. This fileset needs to be uploaded in the Filesets page.
+If this fileset is provided, the CalculateMetrics task can calculate index values for each L3 or T4 image, i.e., 
+the surface area of the segmentation regions divided by the patient's height squared.

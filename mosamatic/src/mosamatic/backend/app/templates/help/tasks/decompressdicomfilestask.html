@@ -1,1 +1,8 @@
-This is some help information
+This task can be used to decompress DICOM images from JPEG2000-compressed format to a raw (uncompressed) format.
+Most DICOM processing tasks, like <b>MuscleFatSegmentationL3Task</b> and <b>MuscleFatSegmentationT4Task</b> automatically
+decompress DICOM files before doing their thing, but sometimes it can be handy to do this in a separate step, e.g., when 
+you want to load the DICOM images into another tool like Tomovision Sliceomatic. Older versions of this tool do not support
+JPEG2000-compressed DICOM images (they will display as a black square).<br>
+<br>
+The output fileset for this task will contain an uncompressed copy of the files in the input fileset. If the images were
+already uncompressed they will simply be copied as-is.

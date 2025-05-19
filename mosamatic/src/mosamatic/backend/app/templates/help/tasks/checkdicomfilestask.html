@@ -1,1 +1,13 @@
-This is some help information
+This task can be used to check whether each DICOM image in your fileset is truly 2-dimensional or
+has a 3rd dimension in each pixel. The latter case can occur when DICOM images have been loaded into
+MicroDicom viewer. More recent versions of this tool seems to convert the DICOM images to another 
+DICOM type where each pixel represents a <i>color</i> instead of a <i>gray value</i>. Color pixels consist of 3 elements,
+red (R), green (G) and blue (B), hence the extra dimension in the DICOM image. These images cannot be
+used by Mosamatic for body composition analysis so to prevent errors downstream it can be wise to check
+the dimenionality of the DICOM images using this task.<br>
+<br>
+Simply specify which image fileset the task should use.<br>
+<br>
+After running the task, if there are issues with the images, a file called errors.txt will be created and
+stored in the output fileset for this task. This error file will list all image files that do not have the
+correct dimension.

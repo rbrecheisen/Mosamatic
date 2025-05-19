@@ -1,1 +1,16 @@
-This is some help information
+This task can be used to automatically select L3 or T4 slices from a set of abdominal or thoracic CT scans.
+Previously, Mosamatic required these images to be pre-selected from full CT scans. This is rather time-
+consuming so we created a task that does this automatically.<br>
+<br>
+This task uses the open-source tool Total Segmentator (Wasser et al.) to first segment the vertebral spine
+and the individual vertebrae. It will then select either the L3 or T4 vertebra and determine the DICOM slice
+that goes right through the middle of these vertebrae. The resulting L3 or T4 images will be stored in the
+output fileset and, from there, can be used in any subsequent tasks like the <b>MuscleFatSegmentationL3Task</b> task.<br>
+<br>
+Since this task can handle multiple CT scans at once, you can select multiple filesets as input. For this click the 
+first fileset in the list and, while holding down the Ctrl key, select other filesets you wish to include. You can
+also select the first and last by holding the Shift key. Or press Ctrl+A to select all filesets. Then click the 
+<b>Add selected</b> button to add the filesets to the area below the button. These will be the filesets included in
+the slice selection task.<br>
+Then select the <b>Vertebral level</b>. This can be L3 or T4 (other levels will be added in the future). Optionally,
+provide an output fileset name, and click <b>Run task</b>.

@@ -1,1 +1,53 @@
-This is some help information
+{% load static %}
+<!-- <img src="{% static 'app/tasks.png' %}"/> -->
+
+This is the main page of Mosamatic.<br>
+<br>
+Its main purpose is to upload and view filesets. A fileset is a collection of files. Each fileset has a 
+unique ID and a name. The name does not have to be unique but to distinguish filesets it's best to choose
+a unique name.<br>
+<br>
+<h5>Uploading a single fileset</h5>
+Files can be uploaded in two different ways: (1) as a single fileset and (2) as multiple filesets. To upload 
+a single fileset, you click <b>Choose Files</b> and navigate to the <i>directory</i> containing the files you
+wish to upload. Please be aware, that ALL files in this directory will be uploaded to Mosamatic. You cannot 
+upload individual files. The reason Mosamatic only supports directory upload is because this allows uploading 
+multiple directories (e.g., each containing files for a given imaging scan), resulting in multiple filesets.<br>
+<br>
+To upload files into a single fileset, make sure to <i>enable</i> the <b>Store files as single fileset</b> checkbox.
+Click <b>Choose Files</b> and select the directory containing the files in question. You can provide a name for
+the fileset. If you don't, a name will be generated automatically.<br>
+Once the files are uploaded (an animated icon will be shown while the upload is in progress), the fileset will 
+appear below the <b>Upload</b> button. You can click the fileset name to view the contents of the fileset, i.e.,
+the set of individual files.<br>
+<br>
+To remove a fileset from Mosamatic, click the <b>[delete]</b> link to the right of the fileset. To remove all 
+filesets at once, click the <b>Delete all filesets</b> link just below the <b>Upload</b> button.<br>
+<br>
+<h5>Uploading multiple filesets</h5>
+To upload multiple filesets at once, e.g., to upload multiple CT scans, make sure you <i>disable</i> the
+<b>Store files as single fileset</b> checkbox. Then click <b>Choose Files</b> and navigate to the TOP-LEVEL directory
+containing subdirectories for each scan's files. See below for the expected directory structure:<br>
+<br>
+<ul>
+    <li>
+        Top-level directory
+        <ul>
+            <li>
+                Scan 1
+                <ul>
+                    <li>File 1</li>
+                    <li>File 2</li>
+                    <li>...</li>
+                </ul>
+            </li>
+            <li>Scan 2</li>
+            <li>...</li>
+        </ul>
+    </li>
+</ul>
+<br>
+The multi-fileset upload is primarily designed for upload of multiple DICOM scans. The upload procedure automatically
+detects which image belongs to which scan and creates a separate fileset for each scan. The name of the fileset will 
+be based on the scan file's directory. So, in the above directory structure, the filesets will be named <b>Scan 1</b>,
+<b>Scan 2</b>, etc. 

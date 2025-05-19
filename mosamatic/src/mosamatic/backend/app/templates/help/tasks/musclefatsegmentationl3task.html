@@ -1,1 +1,31 @@
-This is some help information
+This task can be used to automatically detect muscle and fat regions in CT images acquired at the L3 vertebral level.
+It takes two input filesets: (1) the DICOM images to be analyzed and (2) the AI model files to be used for segmenting
+muscle and fat tissue.<br>
+<br>
+The AI model files are represented by just another fileset so they have to be uploaded beforehand in the Filesets page.
+There are 3 model files:<br>
+<br>
+<ul>
+    <li>AI model that detects abdominal contour</li>
+    <li>AI model for muscle/fat</li>
+    <li>Parameter file (.json)</li>
+</ul>
+The contour model is used to detect and extract only the abdomen, thereby ignoring possible arms and external devices
+that may be visible in the L3 image. This can sometimes happen in images of trauma patients. In most CT scans, the arms
+are kept above the patient's head and are not visible.<br>
+<br>
+The main AI model detects muscle and fat regions at L3. It classifies the image as consisting of 4 regions: (1) muscle,
+(2) visceral fat, (3) subcutaneous fat and (4) background (everything else).<br>
+<br>
+The parameter file contains some technical configuration parameters for the AI models. You don't need to woryry about 
+these parameters as long as the .json file is there.<br>
+<br>
+This task takes some time to execute. Initializing the graphics hardware may take a few seconds. Processing each L3 
+images takes about 1-2 seconds so if you have 100 images you may have to wait about 1-2 minutes. Enable the <b>Auto refresh</b>
+checkbox to see live progress updates. For more details you can go to the <b>Logs</b> page by clicking the corresponding link
+in the top-left of the page. You need to refresh this page to see logging updates.<br>
+<br>
+After the task finishes, the segmentations will be stored in the output fileset for this task. The segmentation files cannot
+be viewed directly (either online or offline) but can be converted to PNG images using the <b>CreatePngsFromSegmentationsTask</b>
+task. As explained in that task's help information, the segmentation files are Python NumPy array objects. Useful for further
+processing but not for easy viewing.
