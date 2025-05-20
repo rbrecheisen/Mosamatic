@@ -165,7 +165,7 @@ TASK_REGISTRY = {
             {'name': 'segmentations', 'label': 'Enter name for segmentation output (optional)'},
         ],
         'params': [
-            {'name': 'model_version', 'label': 'Select model version', 'type': 'select', 'options': [1.0]},
+            {'name': 'model_version', 'label': 'Select model version', 'type': 'select', 'options': [2.2]},
         ],
         'visible': True,
     },
