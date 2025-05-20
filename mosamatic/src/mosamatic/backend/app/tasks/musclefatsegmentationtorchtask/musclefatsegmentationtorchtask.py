@@ -27,7 +27,8 @@ class MuscleFatSegmentationTorchTask(Task):
         for f_path in model_files:
             f_name = os.path.split(f_path)[1]
             if f_name == f'model-{str(model_version)}.pt':
-                model = models.AttentionUNet(params, 4).to(device=DEVICE)
+                # model = models.AttentionUNet(params, 4).to(device=DEVICE)
+                model = models.UNet(params, 4).to(device=DEVICE)
                 model.load_state_dict(torch.load(f_path, weights_only=False, map_location=torch.device(DEVICE)))
                 model.eval()
             elif f_name == f'contour_model-{str(model_version)}.pt':

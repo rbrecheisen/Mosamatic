@@ -77,7 +77,7 @@ class Task(threading.Thread):
     
     def set_progress(self, step, nr_steps):
         self._progress = int(((step + 1) / (nr_steps)) * 100)
-        self.log_info(f'progress = {self._progress}')
+        # self.log_info(f'progress = {self._progress}')
 
     def created(self):
         return self._created
