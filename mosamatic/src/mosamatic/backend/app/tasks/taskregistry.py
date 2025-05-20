@@ -1,7 +1,7 @@
 from .decompressdicomfilestask.decompressdicomfilestask import DecompressDicomFilesTask
 from .rescaledicomfilestask.rescaledicomfilestask import RescaleDicomFilesTask
 from .musclefatsegmentationl3task.musclefatsegmentationl3task import MuscleFatSegmentationL3Task
-from .musclefatsegmentationt4task.musclefatsegmentationt4task import MuscleFatSegmentationT4Task
+from .musclefatsegmentationtorchtask.musclefatsegmentationtorchtask import MuscleFatSegmentationTorchTask
 from .calculatemetricstask.calculatemetricstask import CalculateMetricsTask
 from .createpngsfromsegmentationstask.createpngsfromsegmentationstask import CreatePngsFromSegmentationsTask
 from .totalsegmentatortask.totalsegmentatortask import TotalSegmentatorTask
@@ -153,9 +153,9 @@ TASK_REGISTRY = {
         'visible': True,
     },
 
-    'MuscleFatSegmentationT4Task': {
-        'class': MuscleFatSegmentationT4Task,
-        'title': 'MuscleFatSegmentationT4Task',
+    'MuscleFatSegmentationTorchTask': {
+        'class': MuscleFatSegmentationTorchTask,
+        'title': 'MuscleFatSegmentationTorchTask',
         'description': 'Task that automatically annotates muscle and fat tissue in CT images at T4 level (uses PyTorch AI model)',
         'inputs': [
             {'name': 'images', 'label': 'Select images'},

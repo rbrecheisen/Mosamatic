@@ -11,7 +11,7 @@ from .paramloader import Params
 DEVICE = 'cpu'
 
 
-class MuscleFatSegmentationT4Task(Task):
+class MuscleFatSegmentationTorchTask(Task):
     def load_models_and_params(self, model_files, model_version):
         # First load params.json because it is needed to instantiate the models
         params = None
