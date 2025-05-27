@@ -74,30 +74,6 @@ def main():
     differences = pd.DataFrame(data=data)
     differences.to_excel(os.path.join(DATA_DIR, 'differences.xlsx'))
 
-    # print('Per file differences in muscle area')
-    # for (idx1, row1), (idx2, row2) in zip(pt_data.iterrows(), tf_data.iterrows()):
-    #     print('{}: {} (PT) - {} (TF)'.format(row1['file'], row1['muscle_area'], row2['muscle_area']))
-
-    # print('Per file differences in SAT area')
-    # for (idx1, row1), (idx2, row2) in zip(pt_data.iterrows(), tf_data.iterrows()):
-    #     print('{}: {} (PT) - {} (TF)'.format(row1['file'], row1['sat_area'], row2['sat_area']))
-
-    # print('Per file differences in VAT area')
-    # for (idx1, row1), (idx2, row2) in zip(pt_data.iterrows(), tf_data.iterrows()):
-    #     print('{}: {} (PT) - {} (TF)'.format(row1['file'], row1['vat_area'], row2['vat_area']))
-
-    # print('Per file differences in muscle RA')
-    # for (idx1, row1), (idx2, row2) in zip(pt_data.iterrows(), tf_data.iterrows()):
-    #     print('{}: {} (PT) - {} (TF)'.format(row1['file'], row1['muscle_ra'], row2['muscle_ra']))
-
-    # print('Per file differences in SAT RA')
-    # for (idx1, row1), (idx2, row2) in zip(pt_data.iterrows(), tf_data.iterrows()):
-    #     print('{}: {} (PT) - {} (TF)'.format(row1['file'], row1['sat_ra'], row2['sat_ra']))
-
-    # print('Per file differences in VAT RA')
-    # for (idx1, row1), (idx2, row2) in zip(pt_data.iterrows(), tf_data.iterrows()):
-    #     print('{}: {} (PT) - {} (TF)'.format(row1['file'], row1['vat_ra'], row2['vat_ra']))
-
     # create_comparison_pngs()
 
 
