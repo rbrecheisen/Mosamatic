@@ -3,6 +3,7 @@ from .rescaledicomfilestask.rescaledicomfilestask import RescaleDicomFilesTask
 from .musclefatsegmentationl3task.musclefatsegmentationl3task import MuscleFatSegmentationL3Task
 from .musclefatsegmentationtorchtask.musclefatsegmentationtorchtask import MuscleFatSegmentationTorchTask
 from .calculatemetricstask.calculatemetricstask import CalculateMetricsTask
+from .createpngsfromdicomfilestask.createpngsfromdicomfilestask import CreatePngsFromDicomFilesTask
 from .createpngsfromsegmentationstask.createpngsfromsegmentationstask import CreatePngsFromSegmentationsTask
 from .totalsegmentatortask.totalsegmentatortask import TotalSegmentatorTask
 from .selectslicefromscanstask.selectslicefromscanstask import SelectSliceFromScansTask
@@ -25,7 +26,7 @@ TASK_REGISTRY = {
             {'name': 'output', 'label': 'Enter name for output (optional)'},
         ],
         'params': [],
-        'visible': True,
+        'visible': False,
     },
 
     'DecompressDicomFilesTask': {
@@ -70,7 +71,7 @@ TASK_REGISTRY = {
             {'name': 'segmentations', 'label': 'Enter name for segmentation output (optional)'},
         ],
         'params': [],
-        'visible': True,
+        'visible': False,
     },
     
     'CalculateMetricsTask': {
@@ -86,6 +87,23 @@ TASK_REGISTRY = {
             {'name': 'metrics', 'label': 'Enter name for metrics output (optional)'},
         ],
         'params': [],
+        'visible': True,
+    },
+
+    'CreatePngsFromDicomFilesTask': {
+        'class': CreatePngsFromDicomFilesTask,
+        'title': 'CreatePngsFromDicomFilesTask',
+        'description': 'Task that generates PNG images from DICOM images',
+        'inputs': [
+            {'name': 'images', 'label': 'Select DICOM images'},
+        ],
+        'outputs': [
+            {'name': 'png_images', 'label': 'Enter name for PNG output (optional)'},
+        ],
+        'params': [
+            {'name': 'fig_width', 'label': 'Figure width', 'type': 'int', 'value': 10},
+            {'name': 'fig_height', 'label': 'Figure height', 'type': 'int', 'value': 10},
+        ],
         'visible': True,
     },
 
@@ -120,7 +138,7 @@ TASK_REGISTRY = {
             {'name': 'task', 'label': 'Task to run', 'type': 'select', 'options': ['all', 'liver_vessels', 'liver_segments']},
             {'name': 'fast', 'label': 'Use fast option', 'type': 'bool', 'default': True},
         ],
-        'visible': True,
+        'visible': False,
     },
 
     'SelectSliceFromScansTask': {
@@ -150,7 +168,7 @@ TASK_REGISTRY = {
             {'name': 'comparison', 'label': 'Enter name for output fileset containing comparison (optional)'},
         ],
         'params': [],
-        'visible': True,
+        'visible': False,
     },
 
     'MuscleFatSegmentationTorchTask': {
@@ -182,7 +200,7 @@ TASK_REGISTRY = {
             {'name': 'png', 'label': 'Enter name for fileset with middle-slice PNG image (optional)'},
         ],
         'params': [],
-        'visible': True,
+        'visible': False,
     },
 
     'AnonymizeDicomFilesTask': {
@@ -197,6 +215,6 @@ TASK_REGISTRY = {
             {'name': 'anonymized', 'label': 'Enter name for anonymized fileset (optional)'},
         ],
         'params': [],
-        'visible': True,
+        'visible': False,
     },
 }
