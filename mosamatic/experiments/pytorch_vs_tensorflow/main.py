@@ -4,6 +4,8 @@ import pandas as pd
 from PIL import Image
 
 DATA_DIR = os.path.join(os.getcwd(), 'mosamatic', 'experiments', 'pytorch_vs_tensorflow')
+PT_CSV = 'metrics_PT.csv'
+TF_CSV = 'metrics_TF.csv'
 
 
 def create_comparison_pngs():
@@ -34,19 +36,69 @@ def create_comparison_pngs():
 
 
 def main():
-    pt_data = pd.read_csv(os.path.join(DATA_DIR, 'metrics_pytorch.csv'), sep=';')
-    tf_data = pd.read_csv(os.path.join(DATA_DIR, 'metrics_tensorflow.csv'), sep=';')
+    pt_data = pd.read_csv(os.path.join(DATA_DIR, PT_CSV), sep=';')
+    tf_data = pd.read_csv(os.path.join(DATA_DIR, TF_CSV), sep=';')
 
-    print('Mean differences:')
+    data = {
+        'muscle_area': [],
+        'muscle_ra': [],
+        'vat_area': [],
+        'vat_ra': [],
+        'sat_area': [],
+        'sat_ra': [],
+    }
+
     for column in ['muscle_area', 'muscle_ra', 'vat_area', 'vat_ra', 'sat_area', 'sat_ra']:
-        print('{}:\t\t{}'.format(column, (pt_data[column] - tf_data[column]).abs().mean()))
-    print()
+        data[column].append((pt_data[column] - tf_data[column]).abs().mean())
 
-    print('Per file differences in muscle area:')
+    mean_differences = pd.DataFrame(data=data)
+    mean_differences.to_excel(os.path.join(DATA_DIR, 'mean_differences.xlsx'))
+
+    data = {
+        'file': [],
+        'muscle_area': [],
+        'muscle_ra': [],
+        'vat_area': [],
+        'vat_ra': [],
+        'sat_area': [],
+        'sat_ra': [],
+    }
+
     for (idx1, row1), (idx2, row2) in zip(pt_data.iterrows(), tf_data.iterrows()):
-        print('{}: {} (PT) - {} (TF)'.format(row1['file'], row1['muscle_area'], row2['muscle_area']))
+        data['file'].append(row1['file'])
+        for column in data.keys():
+            if column == 'file':
+                continue
+            data[column].append((row1[column] - row2[column]))
 
-    create_comparison_pngs()
+    differences = pd.DataFrame(data=data)
+    differences.to_excel(os.path.join(DATA_DIR, 'differences.xlsx'))
+
+    # print('Per file differences in muscle area')
+    # for (idx1, row1), (idx2, row2) in zip(pt_data.iterrows(), tf_data.iterrows()):
+    #     print('{}: {} (PT) - {} (TF)'.format(row1['file'], row1['muscle_area'], row2['muscle_area']))
+
+    # print('Per file differences in SAT area')
+    # for (idx1, row1), (idx2, row2) in zip(pt_data.iterrows(), tf_data.iterrows()):
+    #     print('{}: {} (PT) - {} (TF)'.format(row1['file'], row1['sat_area'], row2['sat_area']))
+
+    # print('Per file differences in VAT area')
+    # for (idx1, row1), (idx2, row2) in zip(pt_data.iterrows(), tf_data.iterrows()):
+    #     print('{}: {} (PT) - {} (TF)'.format(row1['file'], row1['vat_area'], row2['vat_area']))
+
+    # print('Per file differences in muscle RA')
+    # for (idx1, row1), (idx2, row2) in zip(pt_data.iterrows(), tf_data.iterrows()):
+    #     print('{}: {} (PT) - {} (TF)'.format(row1['file'], row1['muscle_ra'], row2['muscle_ra']))
+
+    # print('Per file differences in SAT RA')
+    # for (idx1, row1), (idx2, row2) in zip(pt_data.iterrows(), tf_data.iterrows()):
+    #     print('{}: {} (PT) - {} (TF)'.format(row1['file'], row1['sat_ra'], row2['sat_ra']))
+
+    # print('Per file differences in VAT RA')
+    # for (idx1, row1), (idx2, row2) in zip(pt_data.iterrows(), tf_data.iterrows()):
+    #     print('{}: {} (PT) - {} (TF)'.format(row1['file'], row1['vat_ra'], row2['vat_ra']))
+
+    # create_comparison_pngs()
 
 
 if __name__ == '__main__':
