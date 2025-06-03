@@ -31,3 +31,14 @@
 ## [1.3] - 28-04-2025
 ### Added
 - REST API for running tasks from the command line
+
+## [1.4] - 27-05-2025
+### Added
+- MuscleFatSegmentationL3TorchTask: L3 muscle/fat segmentation using PyTorch AI model
+  instead of TensorFlow. New model has been validated to produce almost identical 
+  output as old model.
+- CreatePngsFromDicomFilesTask: convenience task to generate PNG images from DICOM
+  images. Can be used to visually check automatically selected L3 images.
+
+### Updated
+- MuscleFatSegmentationL3Task: removed (set to invisible)

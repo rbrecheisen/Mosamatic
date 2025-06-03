@@ -6,7 +6,7 @@ from .tensorflowmodel import TensorFlowModel
 from ...utils import load_dicom, is_jpeg2000_compressed, normalize_between, get_pixels_from_dicom_object, convert_labels_to_157
 
 
-class MuscleFatSegmentationL3Task(Task):
+class MuscleFatSegmentationL3TensorFlowTask(Task):
     def load_models_and_params(self, model_files, model_type, model_version):
         if model_type == 'tensorflow':
             tensorflow_model = TensorFlowModel()

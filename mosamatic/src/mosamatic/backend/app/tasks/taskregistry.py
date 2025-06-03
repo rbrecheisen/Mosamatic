@@ -1,7 +1,7 @@
 from .decompressdicomfilestask.decompressdicomfilestask import DecompressDicomFilesTask
 from .rescaledicomfilestask.rescaledicomfilestask import RescaleDicomFilesTask
-from .musclefatsegmentationl3task.musclefatsegmentationl3task import MuscleFatSegmentationL3Task
-from .musclefatsegmentationtorchtask.musclefatsegmentationtorchtask import MuscleFatSegmentationTorchTask
+from .musclefatsegmentationl3tensorflowtask.musclefatsegmentationl3tensorflowtask import MuscleFatSegmentationL3TensorFlowTask
+from .musclefatsegmentationl3torchtask.musclefatsegmentationl3torchtask import MuscleFatSegmentationL3TorchTask
 from .calculatemetricstask.calculatemetricstask import CalculateMetricsTask
 from .createpngsfromdicomfilestask.createpngsfromdicomfilestask import CreatePngsFromDicomFilesTask
 from .createpngsfromsegmentationstask.createpngsfromsegmentationstask import CreatePngsFromSegmentationsTask
@@ -59,9 +59,9 @@ TASK_REGISTRY = {
         'visible': True,
     },
 
-    'MuscleFatSegmentationL3Task': {
-        'class': MuscleFatSegmentationL3Task,
-        'title': 'MuscleFatSegmentationL3Task',
+    'MuscleFatSegmentationL3TensorFlowTask': {
+        'class': MuscleFatSegmentationL3TensorFlowTask,
+        'title': 'MuscleFatSegmentationL3TensorFlowTask',
         'description': 'Task that automatically annotates muscle and fat tissue in CT images at L3 level (uses TensorFlow AI model)',
         'inputs': [
             {'name': 'images', 'label': 'Select images'},
@@ -71,7 +71,24 @@ TASK_REGISTRY = {
             {'name': 'segmentations', 'label': 'Enter name for segmentation output (optional)'},
         ],
         'params': [],
-        'visible': False,
+        'visible': True,
+    },
+    
+    'MuscleFatSegmentationL3TorchTask': {
+        'class': MuscleFatSegmentationL3TorchTask,
+        'title': 'MuscleFatSegmentationL3TorchTask',
+        'description': 'Task that automatically annotates muscle and fat tissue in CT images at L3 level (uses PyTorch AI model)',
+        'inputs': [
+            {'name': 'images', 'label': 'Select L3 images'},
+            {'name': 'model_files', 'label': 'Select model files'},
+        ],
+        'outputs': [
+            {'name': 'segmentations', 'label': 'Enter name for segmentation output (optional)'},
+        ],
+        'params': [
+            {'name': 'model_version', 'label': 'Select model version', 'type': 'select', 'options': [2.2]},
+        ],
+        'visible': True,
     },
     
     'CalculateMetricsTask': {
@@ -171,23 +188,6 @@ TASK_REGISTRY = {
         'visible': False,
     },
 
-    'MuscleFatSegmentationTorchTask': {
-        'class': MuscleFatSegmentationTorchTask,
-        'title': 'MuscleFatSegmentationTorchTask',
-        'description': 'Task that automatically annotates muscle and fat tissue in CT images at T4 level (uses PyTorch AI model)',
-        'inputs': [
-            {'name': 'images', 'label': 'Select images'},
-            {'name': 'model_files', 'label': 'Select model files'},
-        ],
-        'outputs': [
-            {'name': 'segmentations', 'label': 'Enter name for segmentation output (optional)'},
-        ],
-        'params': [
-            {'name': 'model_version', 'label': 'Select model version', 'type': 'select', 'options': [2.2]},
-        ],
-        'visible': True,
-    },
-    
     'CreatePdffMapsFromDixonScansTask': {
         'class': CreatePdffMapsFromDixonScansTask,
         'title': 'CreatePdffMapsFromDixonScansTask',

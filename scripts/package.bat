@@ -11,7 +11,6 @@ python scripts\python\updatetomlversion.py %VERSION%
 cd mosamatic
 
 rmdir /s /q "build"
-rmdir /s /q "dist"
 
 briefcase create
 briefcase build

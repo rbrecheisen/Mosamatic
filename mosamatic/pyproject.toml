@@ -2,7 +2,7 @@
 project_name = "Mosamatic"
 bundle = "com.rbeesoft"
 icon = "src/mosamatic/resources/letter-m"
-version = "1.3"
+version = "1.4"
 url = "https://mosamatic.rbeesoft.nl/wordpress/"
 author = "Ralph Brecheisen"
 author_email = "ralph.brecheisen@gmail.com"
@@ -28,6 +28,7 @@ requires = [
     "django-session-security",
     "django-guardian",
     "django-crispy-forms",
+    "djangorestframework",
     "crispy-bootstrap5",
     "pendulum",
     "numpy",
@@ -36,6 +37,7 @@ requires = [
     "scipy",
     "pillow",
     "pydicom",
+    "deid",
     "dicom2nifti",
     "python-gdcm",
     "tensorflow==2.15.0",
