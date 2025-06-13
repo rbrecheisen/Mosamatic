@@ -1,0 +1,52 @@
+services:
+
+  db:
+    image: postgres:16-alpine
+    container_name: mosamatic_postgres
+    environment:
+      - POSTGRES_DB=db
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=foobar
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U root -d db"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    expose:
+      - 5432
+    volumes:
+      - mosamatic_postgres_data:/var/lib/postgresql/data
+
+  web:
+    image: brecheisen/mosamatic-web-intel:1.4
+    platform: linux/amd64
+    container_name: mosamatic_web
+    environment:
+      - DATA_DIR=/data
+      - VERSION=1.4
+      - POSTGRES_DB=db
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=foobar
+      - POSTGRES_HOST=mosamatic_postgres # When you run Django in Docker set the host
+      - POSTGRES_PORT=5432
+      - DOCKER=1
+      - ADMIN_USER=admin
+      - ADMIN_PASSWORD=admin
+      - SECRET_KEY=f9sd7f97sdf89as7fd98as7d9f7sad9f
+    ports:
+      - 8000:8001
+    volumes:
+      - mosamatic_data:/data
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  mosamatic_data:
+    name: mosamatic_data
+  mosamatic_postgres_data:
+    name: mosamatic_postgres_data
+
+networks:
+  default:
+    name: mosamatic
