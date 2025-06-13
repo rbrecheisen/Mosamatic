@@ -4,7 +4,7 @@ setlocal
 
 set /p VERSION=<VERSION
 
-call scripts\builddocker.bat
+@REM call scripts\builddocker.bat
 
 docker logout
 type C:\\Users\\r.brecheisen\\dockerhub.txt | docker login --username brecheisen --password-stdin

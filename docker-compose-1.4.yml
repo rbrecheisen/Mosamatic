@@ -14,10 +14,13 @@ services:
       retries: 5
     expose:
       - 5432
+    ports:
+      - 5432:5432  # Required for running Django outside Docker but using PostgreSQL
     volumes:
       - mosamatic_postgres_data:/var/lib/postgresql/data
 
   web:
+    build: .
     image: brecheisen/mosamatic-web-intel:1.4
     platform: linux/amd64
     container_name: mosamatic_web
@@ -43,10 +46,8 @@ services:
 
 volumes:
   mosamatic_data:
-    name: mosamatic_data
   mosamatic_postgres_data:
-    name: mosamatic_postgres_data
 
 networks:
   default:
-    name: mosamatic
+    name: mosamatic_network
