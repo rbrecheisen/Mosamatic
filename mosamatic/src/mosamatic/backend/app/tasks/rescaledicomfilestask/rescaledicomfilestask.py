@@ -44,6 +44,9 @@ class RescaleDicomFilesTask(Task):
             p = load_dicom(source)
             if is_jpeg2000_compressed(p):
                 p.decompress()
+            if not p.get('Modality') == 'CT':
+                LOG.warning(f'File {source} is not a valid CT image but something else, skipping...')
+                continue
             pixel_array = p.pixel_array
             if len(pixel_array.shape) == 2:
                 if p.Rows != target_size or p.Columns != target_size:
