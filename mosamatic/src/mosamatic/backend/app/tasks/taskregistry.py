@@ -8,6 +8,7 @@ from .createpngsfromsegmentationstask.createpngsfromsegmentationstask import Cre
 from .totalsegmentatortask.totalsegmentatortask import TotalSegmentatorTask
 from .selectslicefromscanstask.selectslicefromscanstask import SelectSliceFromScansTask
 from .validatesliceselectiontask.validatesliceselectiontask import ValidateSliceSelectionTask
+from .validatemusclefatsegmentationtask.validatemusclefatsegmentationtask import ValidateMuscleFatSegmentationTask
 from .createpdffmapsfromdixonscanstask.createpdffmapsfromdixonscanstask import CreatePdffMapsFromDixonScansTask
 from .checkdicomfilestask.checkdicomfilestask import CheckDicomFilesTask
 from .anonymizedicomfilestask.anonymizedicomfilestask import AnonymizeDicomFilesTask
@@ -186,6 +187,21 @@ TASK_REGISTRY = {
         ],
         'params': [],
         'visible': False,
+    },
+
+    'ValidateMuscleFatSegmentationTask': {
+        'class': ValidateMuscleFatSegmentationTask,
+        'title': 'ValidateMuscleFatSegmentationTask',
+        'description': 'Task that validates muscle/fat segmentations with ground truth masks',
+        'inputs': [
+            {'name': 'true_mask_files', 'label': 'Ground truth files'},
+            {'name': 'pred_mask_files', 'label': 'Predicted segmentation files'},
+        ],
+        'outputs': [
+            {'name': 'dice_scores', 'label': 'Enter name for output fileset containing comparison (optional)'},
+        ],
+        'params': [],
+        'visible': True,
     },
 
     'CreatePdffMapsFromDixonScansTask': {
