@@ -30,5 +30,6 @@ class ValidateMuscleFatSegmentationTask(Task):
                 if pred_mask_file:
                     """
                     true_mask = get_pixels_from_tag_file(true_mask_file)
+                    pred_mask = load_numpy_array(pred_mask_file)
                     """
                     print(pred_mask_file)
