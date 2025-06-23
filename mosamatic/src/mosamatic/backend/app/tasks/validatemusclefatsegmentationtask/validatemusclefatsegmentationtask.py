@@ -25,5 +25,10 @@ class ValidateMuscleFatSegmentationTask(Task):
             if self.is_canceled():
                 break
             true_mask_file = true_mask_files[step]
-            pred_mask_file = self.find_pred_mask_file(true_mask_file, pred_mask_files)
-            print(pred_mask_file)
+            if true_mask_file.endswith('.tag'):
+                pred_mask_file = self.find_pred_mask_file(true_mask_file, pred_mask_files)
+                if pred_mask_file:
+                    """
+                    true_mask = get_pixels_from_tag_file(true_mask_file)
+                    """
+                    print(pred_mask_file)
