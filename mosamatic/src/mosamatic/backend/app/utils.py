@@ -16,6 +16,10 @@ from pydicom.uid import (
 
 warnings.filterwarnings("ignore", message="Invalid value for VR UI:", category=UserWarning)
 
+MUSCLE = 1
+VAT = 5
+SAT = 7
+
 
 def create_name_with_timestamp(prefix: str='') -> str:
     tz = pendulum.local_timezone()
